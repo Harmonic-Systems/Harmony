@@ -16,7 +16,7 @@ To a python script or a jupyter notebook with the corresponding [pyautogen](http
 From this repository:
 
 ```bash
-python -m pip install https://github.com/harmony/py.git
+python -m pip install git+https://github.com/harmony/py.git
 ```
 
 ## Usage
