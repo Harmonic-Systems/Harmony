@@ -18,6 +18,8 @@ mkdocs-minify-html-plugin==0.2.3
     # via harmony (pyproject.toml)
 mkdocstrings==0.26.1
     # via harmony (pyproject.toml)
+mkdocstrings-python==1.11.1
+    # via harmony (pyproject.toml)
 pyautogen==0.3.0
     # via harmony (pyproject.toml)
 twisted==24.7.0
