@@ -28,7 +28,7 @@ pylint-exit==1.2.0
     # via harmony (pyproject.toml)
 python-dotenv==1.0.1
     # via harmony (pyproject.toml)
-ruff==0.6.4
+ruff==0.6.5
     # via harmony (pyproject.toml)
 twisted==24.7.0
     # via harmony (pyproject.toml)
