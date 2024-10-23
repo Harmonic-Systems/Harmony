@@ -1,16 +1,16 @@
 """Method related string generation utilities."""
 
-from harmony.models import METHOD_ARGS, WaldieMethodName
+from harmony.models import METHOD_ARGS, HarmonyMethodName
 
 
 def get_method_string(
-    method_name: WaldieMethodName, renamed_method_name: str, method_body: str
+    method_name: HarmonyMethodName, renamed_method_name: str, method_body: str
 ) -> str:
     """Get a function string.
 
     Parameters
     ----------
-    method_name : WaldieMethodName
+    method_name : HarmonyMethodName
         The method name.
     renamed_method_name : str
         The renamed method name.

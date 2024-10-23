@@ -1,6 +1,6 @@
-"""Waldie data class.
+"""Harmony data class.
 
-A Waldie class contains all the information that is needed to generate
+A Harmony class contains all the information that is needed to generate
 and run an autogen workflow. It has the model/LLM configurations, the agent
 definitions and their optional additional skills to be used.
 """
@@ -13,25 +13,21 @@ from typing import Any, Dict, Iterator, List, Optional, Tuple, Union
 #  let's be strict with autogen version
 from autogen.version import __version__ as autogen_version  # type: ignore
 
-from .models import (
-    WaldieAgent,
-    WaldieChat,
-    WaldieFlow,
-    WaldieModel,
-    WaldieSkill,
-)
-
-# fmt: on
+from .agents import HarmonyAgent
+from .chat import HarmonyChat
+from .flow import HarmonyFlow
+from .model import HarmonyModel
+from .skill import HarmonySkill
 
 
 @dataclass(frozen=True, slots=True)
-class Waldie:
-    """Waldie data class.
+class Harmony:
+    """Harmony data class.
 
     It contains all the information to generate and run an autogen workflow.
     """
 
-    flow: WaldieFlow
+    flow: HarmonyFlow
 
     @classmethod
     def from_dict(
@@ -42,8 +38,8 @@ class Waldie:
         description: Optional[str] = None,
         tags: Optional[List[str]] = None,
         requirements: Optional[List[str]] = None,
-    ) -> "Waldie":
-        """Create a Waldie from dict.
+    ) -> "Harmony":
+        """Create a Harmony from dict.
 
         Parameters
         ----------
@@ -62,8 +58,8 @@ class Waldie:
 
         Returns
         -------
-        Waldie
-            The Waldie.
+        Harmony
+            The Harmony.
         """
         flow = _get_flow(
             data,
@@ -73,23 +69,23 @@ class Waldie:
             tags=tags,
             requirements=requirements,
         )
-        return cls(flow=WaldieFlow.model_validate(flow))
+        return cls(flow=HarmonyFlow.model_validate(flow))
 
     @classmethod
     def load(
         cls,
-        waldie_file: Union[str, Path],
+        harmony_file: Union[str, Path],
         name: Optional[str] = None,
         description: Optional[str] = None,
         tags: Optional[List[str]] = None,
         requirements: Optional[List[str]] = None,
-    ) -> "Waldie":
-        """Load a Waldie from a file.
+    ) -> "Harmony":
+        """Load a Harmony from a file.
 
         Parameters
         ----------
-        waldie_file : Union[str, Path]
-            The Waldie file.
+        harmony_file : Union[str, Path]
+            The Harmony file.
         name : Optional[str], optional
             The name, by default None.
         description : Optional[str], optional
@@ -101,8 +97,8 @@ class Waldie:
 
         Returns
         -------
-        Waldie
-            The Waldie.
+        Harmony
+            The Harmony.
 
         Raises
         ------
@@ -110,13 +106,13 @@ class Waldie:
             If the file is not found or invalid JSON.
         """
         data: Dict[str, Any] = {}
-        if not Path(waldie_file).exists():
-            raise ValueError(f"File not found: {waldie_file}")
-        with open(waldie_file, "r", encoding="utf-8") as file:
+        if not Path(harmony_file).exists():
+            raise ValueError(f"File not found: {harmony_file}")
+        with open(harmony_file, "r", encoding="utf-8") as file:
             try:
                 data = json.load(file)
             except json.decoder.JSONDecodeError as error:
-                raise ValueError(f"Invalid JSON: {waldie_file}") from error
+                raise ValueError(f"Invalid JSON: {harmony_file}") from error
         return cls.from_dict(
             data,
             name=name,
@@ -152,39 +148,39 @@ class Waldie:
         return any(agent.agent_type == "rag_user" for agent in self.agents)
 
     @property
-    def chats(self) -> List[Tuple[WaldieChat, WaldieAgent, WaldieAgent]]:
+    def chats(self) -> List[Tuple[HarmonyChat, HarmonyAgent, HarmonyAgent]]:
         """Get the chats."""
         return self.flow.ordered_flow
 
     @property
-    def agents(self) -> Iterator[WaldieAgent]:
+    def agents(self) -> Iterator[HarmonyAgent]:
         """Get the agents.
 
         Yields
         -------
-        WaldieAgent
+        HarmonyAgent
             The flow agents.
         """
         yield from self.flow.data.agents.members
 
     @property
-    def skills(self) -> Iterator[WaldieSkill]:
+    def skills(self) -> Iterator[HarmonySkill]:
         """Get the flow skills.
 
         Yields
         -------
-        WaldieSkill
+        HarmonySkill
             The skills.
         """
         yield from self.flow.data.skills
 
     @property
-    def models(self) -> Iterator[WaldieModel]:
+    def models(self) -> Iterator[HarmonyModel]:
         """Get the models.
 
         Yields
         -------
-        WaldieModel
+        HarmonyModel
             The flow models.
         """
         yield from self.flow.data.models
@@ -192,12 +188,12 @@ class Waldie:
     @property
     def name(self) -> str:
         """Get the flow name."""
-        return self.flow.name or "Waldie Flow"
+        return self.flow.name or "Harmony Flow"
 
     @property
     def description(self) -> str:
         """Get the flow description."""
-        return self.flow.description or "Waldie Flow description"
+        return self.flow.description or "Harmony Flow description"
 
     @property
     def tags(self) -> List[str]:
@@ -253,17 +249,17 @@ class Waldie:
                 env_vars.append((secret_key, secret_value))
         return env_vars
 
-    def get_group_chat_members(self, agent: WaldieAgent) -> List[WaldieAgent]:
+    def get_group_chat_members(self, agent: HarmonyAgent) -> List[HarmonyAgent]:
         """Get the chat members that connect to a group chat manger agent.
 
         Parameters
         ----------
-        agent : WaldieAgent
+        agent : HarmonyAgent
             The agent (group chat manager).
 
         Returns
         -------
-        List[WaldieAgent]
+        List[HarmonyAgent]
             The group chat members.
         """
         if agent.agent_type != "manager":
@@ -295,9 +291,9 @@ def _get_flow(
         if value:
             data[key] = value
     if "name" not in data:
-        data["name"] = "Waldie Flow"
+        data["name"] = "Harmony Flow"
     if "description" not in data:
-        data["description"] = "Waldie Flow description"
+        data["description"] = "Harmony Flow description"
     if "tags" not in data:
         data["tags"] = []
     if "requirements" not in data:

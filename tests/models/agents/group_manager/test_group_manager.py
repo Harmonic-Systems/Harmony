@@ -2,12 +2,14 @@
 
 import pytest
 
-from harmony.models.agents.group_manager.group_manager import WaldieGroupManager
+from harmony.models.agents.group_manager.group_manager import (
+    HarmonyGroupManager,
+)
 
 
-def test_waldie_group_manager() -> None:
-    """Test WaldieGroupManager."""
-    group_manager = WaldieGroupManager(  # type: ignore
+def test_harmony_group_manager() -> None:
+    """Test HarmonyGroupManager."""
+    group_manager = HarmonyGroupManager(  # type: ignore
         id="wa-1", name="group_manager"
     )
     assert group_manager.data.human_input_mode == "NEVER"
@@ -16,9 +18,9 @@ def test_waldie_group_manager() -> None:
     group_manager.validate_transitions(agent_ids=["wa-1"])
 
 
-def test_waldie_group_manager_transitions() -> None:
-    """Test WaldieGroupManager transitions."""
-    group_manager1 = WaldieGroupManager(
+def test_harmony_group_manager_transitions() -> None:
+    """Test HarmonyGroupManager transitions."""
+    group_manager1 = HarmonyGroupManager(
         id="wa-1",
         name="group_manager",
         data={  # type: ignore
@@ -34,7 +36,7 @@ def test_waldie_group_manager_transitions() -> None:
     )
     group_manager1.validate_transitions(agent_ids=["wa-2", "wa-3"])
 
-    group_manager2 = WaldieGroupManager(
+    group_manager2 = HarmonyGroupManager(
         id="wa-1",
         name="group_manager",
         data={  # type: ignore
@@ -50,7 +52,7 @@ def test_waldie_group_manager_transitions() -> None:
     with pytest.raises(ValueError):
         group_manager2.validate_transitions(agent_ids=["wa-2", "wa-4"])
 
-    group_manager3 = WaldieGroupManager(
+    group_manager3 = HarmonyGroupManager(
         id="wa-1",
         name="group_manager",
         data={  # type: ignore
@@ -67,7 +69,7 @@ def test_waldie_group_manager_transitions() -> None:
     with pytest.raises(ValueError):
         group_manager3.validate_transitions(agent_ids=["wa-2", "wa-3"])
 
-    group_manager4 = WaldieGroupManager(
+    group_manager4 = HarmonyGroupManager(
         id="wa-1",
         name="group_manager",
         data={  # type: ignore

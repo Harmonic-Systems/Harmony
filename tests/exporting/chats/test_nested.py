@@ -7,23 +7,23 @@ from harmony.exporting.chats.nested import (
     get_chat_nested_string,
 )
 from harmony.models import (
-    WaldieAgent,
-    WaldieAgentNestedChat,
-    WaldieAgentNestedChatMessage,
-    WaldieChat,
-    WaldieChatData,
-    WaldieChatMessage,
-    WaldieChatNested,
-    WaldieChatSummary,
+    HarmonyAgent,
+    HarmonyAgentNestedChat,
+    HarmonyAgentNestedChatMessage,
+    HarmonyChat,
+    HarmonyChatData,
+    HarmonyChatMessage,
+    HarmonyChatNested,
+    HarmonyChatSummary,
 )
 
 
 def test_get_chat_nested_string() -> None:
     """Test get_chat_nested_string()."""
     # Given
-    chat = WaldieChat(
+    chat = HarmonyChat(
         id="wc-1",
-        data=WaldieChatData(
+        data=HarmonyChatData(
             name="nested_chat",
             description="A nested chat.",
             source="wa-1",
@@ -31,22 +31,22 @@ def test_get_chat_nested_string() -> None:
             position=-1,
             order=1,
             clear_history=False,
-            message=WaldieChatMessage(
+            message=HarmonyChatMessage(
                 type="string",
                 content="Hello, world!",
                 use_carryover=False,
                 context={},
             ),
-            summary=WaldieChatSummary(
+            summary=HarmonyChatSummary(
                 method=None,
                 prompt="",
                 args={},
             ),
             silent=False,
             max_turns=None,
-            nested_chat=WaldieChatNested(
+            nested_chat=HarmonyChatNested(
                 message=None,
-                reply=WaldieChatMessage(
+                reply=HarmonyChatMessage(
                     type="string",
                     content="Hi",
                     context={},
@@ -83,25 +83,25 @@ def test_get_chat_nested_string() -> None:
 def test_export_nested_chat() -> None:
     """Test export_nested_chat()."""
     # Given
-    agent1 = WaldieAgent(  # type: ignore
+    agent1 = HarmonyAgent(  # type: ignore
         id="wa-1",
         name="agent1",
         agent_type="assistant",
         data={  # type: ignore
             "nested_chats": [
-                WaldieAgentNestedChat(
+                HarmonyAgentNestedChat(
                     triggered_by=[
-                        WaldieAgentNestedChatMessage(
+                        HarmonyAgentNestedChatMessage(
                             id="wc-1",
                             is_reply=True,
                         ),
                     ],
                     messages=[
-                        WaldieAgentNestedChatMessage(
+                        HarmonyAgentNestedChatMessage(
                             id="wc-2",
                             is_reply=False,
                         ),
-                        WaldieAgentNestedChatMessage(
+                        HarmonyAgentNestedChatMessage(
                             id="wc-2",
                             is_reply=True,
                         ),
@@ -110,57 +110,57 @@ def test_export_nested_chat() -> None:
             ]
         },
     )
-    chat1 = WaldieChat(
+    chat1 = HarmonyChat(
         id="wc-1",
-        data=WaldieChatData(
+        data=HarmonyChatData(
             name="nested_chat1",
             description="A nested chat.",
             source="wa-1",
             target="wa-2",
             position=1,
             clear_history=False,
-            message=WaldieChatMessage(
+            message=HarmonyChatMessage(
                 type="string",
                 use_carryover=False,
                 content="Hello, world!",
                 context={},
             ),
-            summary=WaldieChatSummary(
+            summary=HarmonyChatSummary(
                 method=None,
                 prompt="",
                 args={},
             ),
             silent=False,
             max_turns=None,
-            nested_chat=WaldieChatNested(
+            nested_chat=HarmonyChatNested(
                 message="Hello from agent1 to agent2!",  # type: ignore
                 reply="Hello from agent2 to agent1!",  # type: ignore
             ),
         ),
     )
-    chat2 = WaldieChat(
+    chat2 = HarmonyChat(
         id="wc-2",
-        data=WaldieChatData(
+        data=HarmonyChatData(
             name="nested_chat2",
             description="Another nested chat.",
             source="wa-2",
             target="wa-3",
             position=2,
             clear_history=True,
-            message=WaldieChatMessage(
+            message=HarmonyChatMessage(
                 type="string",
                 use_carryover=False,
                 content="Hello, world!",
                 context={},
             ),
-            summary=WaldieChatSummary(
+            summary=HarmonyChatSummary(
                 method=None,
                 prompt="",
                 args={},
             ),
             silent=False,
             max_turns=None,
-            nested_chat=WaldieChatNested(
+            nested_chat=HarmonyChatNested(
                 message={  # type: ignore
                     "type": "string",
                     "content": "Hello from agent2 to agent3!",
@@ -218,25 +218,25 @@ agent1.register_nested_chats(
     assert result == expected
 
     # Given
-    agent2 = WaldieAgent(  # type: ignore
+    agent2 = HarmonyAgent(  # type: ignore
         id="wa-2",
         name="agent2",
         agent_type="assistant",
         data={  # type: ignore
             "nested_chats": [
-                WaldieAgentNestedChat(
+                HarmonyAgentNestedChat(
                     triggered_by=[
-                        WaldieAgentNestedChatMessage(
+                        HarmonyAgentNestedChatMessage(
                             id="wc-1",
                             is_reply=False,
                         ),
                     ],
                     messages=[
-                        WaldieAgentNestedChatMessage(
+                        HarmonyAgentNestedChatMessage(
                             id="wc-2",
                             is_reply=False,
                         ),
-                        WaldieAgentNestedChatMessage(
+                        HarmonyAgentNestedChatMessage(
                             id="wc-2",
                             is_reply=True,
                         ),
@@ -245,9 +245,9 @@ agent1.register_nested_chats(
             ]
         },
     )
-    chat1 = WaldieChat(
+    chat1 = HarmonyChat(
         id="wc-1",
-        data=WaldieChatData(
+        data=HarmonyChatData(
             name="nested_chat1",
             description="A nested chat.",
             source="wa-1",
@@ -255,21 +255,21 @@ agent1.register_nested_chats(
             position=-1,
             order=1,
             clear_history=False,
-            message=WaldieChatMessage(
+            message=HarmonyChatMessage(
                 type="string",
                 use_carryover=False,
                 content="Hello, world!",
                 context={},
             ),
-            summary=WaldieChatSummary(
+            summary=HarmonyChatSummary(
                 method=None,
                 prompt="",
                 args={},
             ),
             silent=False,
             max_turns=None,
-            nested_chat=WaldieChatNested(
-                message=WaldieChatMessage(
+            nested_chat=HarmonyChatNested(
+                message=HarmonyChatMessage(
                     type="method",
                     use_carryover=False,
                     content=(
@@ -278,7 +278,7 @@ agent1.register_nested_chats(
                     ),
                     context={},
                 ),
-                reply=WaldieChatMessage(
+                reply=HarmonyChatMessage(
                     type="method",
                     use_carryover=False,
                     content=(
@@ -292,9 +292,9 @@ agent1.register_nested_chats(
             real_target=None,
         ),
     )
-    chat2 = WaldieChat(
+    chat2 = HarmonyChat(
         id="wc-2",
-        data=WaldieChatData(
+        data=HarmonyChatData(
             name="nested_chat2",
             description="Another nested chat.",
             source="wa-2",
@@ -302,21 +302,21 @@ agent1.register_nested_chats(
             position=-1,
             order=2,
             clear_history=True,
-            message=WaldieChatMessage(
+            message=HarmonyChatMessage(
                 type="string",
                 use_carryover=False,
                 content="Hello, world!",
                 context={},
             ),
-            summary=WaldieChatSummary(
+            summary=HarmonyChatSummary(
                 method=None,
                 prompt="",
                 args={},
             ),
             silent=False,
             max_turns=None,
-            nested_chat=WaldieChatNested(
-                message=WaldieChatMessage(
+            nested_chat=HarmonyChatNested(
+                message=HarmonyChatMessage(
                     type="method",
                     use_carryover=False,
                     content=(
@@ -325,7 +325,7 @@ agent1.register_nested_chats(
                     ),
                     context={},
                 ),
-                reply=WaldieChatMessage(
+                reply=HarmonyChatMessage(
                     type="method",
                     use_carryover=False,
                     content=(
@@ -393,15 +393,15 @@ agent2.register_nested_chats(
     assert result == expected
 
     # Given
-    agent3 = WaldieAgent(  # type: ignore
+    agent3 = HarmonyAgent(  # type: ignore
         id="wa-3",
         name="agent3",
         agent_type="assistant",
         data={  # type: ignore
             "nested_chats": [
-                WaldieAgentNestedChat(
+                HarmonyAgentNestedChat(
                     triggered_by=[
-                        WaldieAgentNestedChatMessage(
+                        HarmonyAgentNestedChatMessage(
                             id="wc-2",
                             is_reply=False,
                         ),
@@ -411,9 +411,9 @@ agent2.register_nested_chats(
             ]
         },
     )
-    chat1 = WaldieChat(
+    chat1 = HarmonyChat(
         id="wc-1",
-        data=WaldieChatData(
+        data=HarmonyChatData(
             name="nested_chat1",
             description="A nested chat.",
             source="wa-1",
@@ -421,20 +421,20 @@ agent2.register_nested_chats(
             position=-1,
             order=1,
             clear_history=False,
-            message=WaldieChatMessage(
+            message=HarmonyChatMessage(
                 type="string",
                 use_carryover=False,
                 content="Hello, world!",
                 context={},
             ),
-            summary=WaldieChatSummary(
+            summary=HarmonyChatSummary(
                 method=None,
                 prompt="",
                 args={},
             ),
             silent=False,
             max_turns=None,
-            nested_chat=WaldieChatNested(
+            nested_chat=HarmonyChatNested(
                 message=None,
                 reply=None,
             ),
@@ -442,9 +442,9 @@ agent2.register_nested_chats(
             real_target=None,
         ),
     )
-    chat2 = WaldieChat(
+    chat2 = HarmonyChat(
         id="wc-2",
-        data=WaldieChatData(
+        data=HarmonyChatData(
             name="nested_chat2",
             description="Another nested chat.",
             source="wa-2",
@@ -452,21 +452,21 @@ agent2.register_nested_chats(
             position=-1,
             order=2,
             clear_history=True,
-            message=WaldieChatMessage(
+            message=HarmonyChatMessage(
                 type="string",
                 use_carryover=False,
                 content="Hello, world!",
                 context={},
             ),
-            summary=WaldieChatSummary(
+            summary=HarmonyChatSummary(
                 method=None,
                 prompt="",
                 args={},
             ),
             silent=False,
             max_turns=None,
-            nested_chat=WaldieChatNested(
-                message=WaldieChatMessage(
+            nested_chat=HarmonyChatNested(
+                message=HarmonyChatMessage(
                     type="none",
                     use_carryover=False,
                     content=None,
@@ -505,7 +505,7 @@ agent3.register_nested_chats(
 )
 """
     # Given
-    agent4 = WaldieAgent(  # type: ignore
+    agent4 = HarmonyAgent(  # type: ignore
         id="wa-4",
         name="agent4",
         agent_type="assistant",

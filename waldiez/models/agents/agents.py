@@ -5,31 +5,31 @@ from typing import Iterator, List
 from pydantic import Field, model_validator
 from typing_extensions import Annotated, Self
 
-from ..common import WaldieBase
-from .agent import WaldieAgent
-from .assistant import WaldieAssistant
-from .group_manager.group_manager import WaldieGroupManager
-from .rag_user import WaldieRagUser
-from .user_proxy import WaldieUserProxy
+from ..common import HarmonyBase
+from .agent import HarmonyAgent
+from .assistant import HarmonyAssistant
+from .group_manager.group_manager import HarmonyGroupManager
+from .rag_user import HarmonyRagUser
+from .user_proxy import HarmonyUserProxy
 
 
-class WaldieAgents(WaldieBase):
+class HarmonyAgents(HarmonyBase):
     """Waldie agents model.
 
     Attributes
     ----------
-    users : List[WaldieUserProxy]
+    users : List[HarmonyUserProxy]
         User proxy agents.
-    assistants : List[WaldieAssistant]
+    assistants : List[HarmonyAssistant]
         Assistant agents.
-    managers : List[WaldieGroupManager]
+    managers : List[HarmonyGroupManager]
         Group chat mangers.
-    rag_users : List[WaldieRagUser]
+    rag_users : List[HarmonyRagUser]
         RAG user agents.
     """
 
     users: Annotated[
-        List[WaldieUserProxy],
+        List[HarmonyUserProxy],
         Field(
             title="Users.",
             description="User proxy agents",
@@ -37,7 +37,7 @@ class WaldieAgents(WaldieBase):
         ),
     ]
     assistants: Annotated[
-        List[WaldieAssistant],
+        List[HarmonyAssistant],
         Field(
             title="Assistants.",
             description="Assistant agents",
@@ -45,7 +45,7 @@ class WaldieAgents(WaldieBase):
         ),
     ]
     managers: Annotated[
-        List[WaldieGroupManager],
+        List[HarmonyGroupManager],
         Field(
             title="Managers.",
             description="Group chat mangers",
@@ -53,7 +53,7 @@ class WaldieAgents(WaldieBase):
         ),
     ]
     rag_users: Annotated[
-        List[WaldieRagUser],
+        List[HarmonyRagUser],
         Field(
             title="RAG Users.",
             description="RAG user agents",
@@ -62,12 +62,12 @@ class WaldieAgents(WaldieBase):
     ]
 
     @property
-    def members(self) -> Iterator[WaldieAgent]:
+    def members(self) -> Iterator[HarmonyAgent]:
         """Get all agents.
 
         Yields
         ------
-        WaldieAgent
+        HarmonyAgent
             The agents.
         """
         yield from self.users
@@ -84,7 +84,7 @@ class WaldieAgents(WaldieBase):
 
         Returns
         -------
-        WaldieAgents
+        HarmonyAgents
             The agents.
 
         Raises
@@ -124,6 +124,6 @@ class WaldieAgents(WaldieBase):
             agent.validate_linked_skills(skill_ids, agent_ids=all_agent_ids)
             agent.validate_code_execution(skill_ids=skill_ids)
             if agent.agent_type == "manager" and isinstance(
-                agent, WaldieGroupManager
+                agent, HarmonyGroupManager
             ):
                 agent.validate_transitions(agent_ids=all_agent_ids)

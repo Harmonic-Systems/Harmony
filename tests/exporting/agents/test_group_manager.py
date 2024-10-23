@@ -6,22 +6,22 @@ from typing import List
 
 from harmony.exporting.agents.group_manager import get_group_manager_extras
 from harmony.models import (
-    WaldieAgent,
-    WaldieGroupManager,
-    WaldieGroupManagerData,
-    WaldieGroupManagerSpeakers,
+    HarmonyAgent,
+    HarmonyGroupManager,
+    HarmonyGroupManagerData,
+    HarmonyGroupManagerSpeakers,
 )
 
 
 def test_get_group_manager_extras() -> None:
     """Test get_group_manager_extras()."""
     # Given
-    agent = WaldieAgent(  # type: ignore
+    agent = HarmonyAgent(  # type: ignore
         id="wa-1",
         name="agent_name",
         agent_type="assistant",
     )
-    group_chat_members: List[WaldieAgent] = []
+    group_chat_members: List[HarmonyAgent] = []
     agent_names = {"wa-1": "agent_name"}
     expected_output = ("", "")
     # When
@@ -33,7 +33,7 @@ def test_get_group_manager_extras() -> None:
     # Then
     assert output == expected_output
     # Given
-    manager = WaldieGroupManager(  # type: ignore
+    manager = HarmonyGroupManager(  # type: ignore
         id="wa-2",
         name="group_manager",
         agent_type="manager",
@@ -66,12 +66,12 @@ def test_get_group_manager_extras() -> None:
         "def custom_speaker_selection(last_speaker, groupchat):\n"
         "    return last_speaker"
     )
-    manager = WaldieGroupManager(  # type: ignore
+    manager = HarmonyGroupManager(  # type: ignore
         id="wa-2",
         name="group_manager",
         agent_type="manager",
-        data=WaldieGroupManagerData(  # type: ignore
-            speakers=WaldieGroupManagerSpeakers(
+        data=HarmonyGroupManagerData(  # type: ignore
+            speakers=HarmonyGroupManagerSpeakers(
                 selection_method="custom",
                 selection_custom_method=custom_selection_content,
                 max_retries_for_selecting=3,
@@ -118,14 +118,14 @@ def test_get_group_manager_extras() -> None:
         "def custom_speaker_selection(last_speaker, groupchat):\n"
         "    return last_speaker"
     )
-    manager = WaldieGroupManager(  # type: ignore
+    manager = HarmonyGroupManager(  # type: ignore
         id="wa-2",
         name="group_manager",
         agent_type="manager",
-        data=WaldieGroupManagerData(  # type: ignore
+        data=HarmonyGroupManagerData(  # type: ignore
             max_round=5,
             admin_name="agent_name",
-            speakers=WaldieGroupManagerSpeakers(
+            speakers=HarmonyGroupManagerSpeakers(
                 selection_method="custom",
                 selection_custom_method=custom_selection_content,
                 max_retries_for_selecting=3,
@@ -177,12 +177,12 @@ def test_get_group_manager_extras() -> None:
     # Then
     assert output == expected_output
     # Given
-    manager = WaldieGroupManager(  # type: ignore
+    manager = HarmonyGroupManager(  # type: ignore
         id="wa-2",
         name="group_manager",
         agent_type="manager",
-        data=WaldieGroupManagerData(  # type: ignore
-            speakers=WaldieGroupManagerSpeakers(
+        data=HarmonyGroupManagerData(  # type: ignore
+            speakers=HarmonyGroupManagerSpeakers(
                 selection_method="round_robin",
                 selection_custom_method=None,
                 max_retries_for_selecting=3,

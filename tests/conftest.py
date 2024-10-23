@@ -3,47 +3,47 @@
 import pytest
 
 from harmony.models import (
-    WaldieAgents,
-    WaldieAgentTeachability,
-    WaldieAgentTerminationMessage,
-    WaldieAssistant,
-    WaldieAssistantData,
-    WaldieChat,
-    WaldieChatData,
-    WaldieChatMessage,
-    WaldieChatNested,
-    WaldieChatSummary,
-    WaldieFlow,
-    WaldieFlowData,
-    WaldieUserProxy,
-    WaldieUserProxyData,
+    HarmonyAgents,
+    HarmonyAgentTeachability,
+    HarmonyAgentTerminationMessage,
+    HarmonyAssistant,
+    HarmonyAssistantData,
+    HarmonyChat,
+    HarmonyChatData,
+    HarmonyChatMessage,
+    HarmonyChatNested,
+    HarmonyChatSummary,
+    HarmonyFlow,
+    HarmonyFlowData,
+    HarmonyUserProxy,
+    HarmonyUserProxyData,
 )
 
 
-def get_runnable_flow() -> WaldieFlow:
-    """Get a runnable WaldieFlow instance.
+def get_runnable_flow() -> HarmonyFlow:
+    """Get a runnable HarmonyFlow instance.
 
     without models and skills
 
     Returns
     -------
-    WaldieFlow
-        A WaldieFlow instance.
+    HarmonyFlow
+        A HarmonyFlow instance.
     """
-    user = WaldieUserProxy(
+    user = HarmonyUserProxy(
         id="wa-1",
         name="user",
         agent_type="user",
         description="User Agent",
         type="agent",
-        data=WaldieUserProxyData(
+        data=HarmonyUserProxyData(
             system_message=None,
             human_input_mode="ALWAYS",
             max_tokens=100,
             code_execution_config=False,
             agent_default_auto_reply="I am a user.",
             max_consecutive_auto_reply=5,
-            termination=WaldieAgentTerminationMessage(
+            termination=HarmonyAgentTerminationMessage(
                 type="keyword",
                 keywords=["bye", "goodbye"],
                 criterion="found",
@@ -52,7 +52,7 @@ def get_runnable_flow() -> WaldieFlow:
             model_ids=[],
             skills=[],
             nested_chats=[],
-            teachability=WaldieAgentTeachability(
+            teachability=HarmonyAgentTeachability(
                 enabled=False,
                 verbosity=0,
                 reset_db=False,
@@ -65,20 +65,20 @@ def get_runnable_flow() -> WaldieFlow:
         created_at="2021-01-01T00:00:00.000Z",
         updated_at="2021-01-01T00:00:00.000Z",
     )
-    assistant = WaldieAssistant(
+    assistant = HarmonyAssistant(
         id="wa-2",
         name="assistant",
         description="Assistant Agent",
         type="agent",
         agent_type="assistant",
-        data=WaldieAssistantData(
+        data=HarmonyAssistantData(
             system_message=None,
             human_input_mode="NEVER",
             max_tokens=100,
             code_execution_config=False,
             agent_default_auto_reply="I am an assistant.",
             max_consecutive_auto_reply=5,
-            termination=WaldieAgentTerminationMessage(
+            termination=HarmonyAgentTerminationMessage(
                 type="keyword",
                 keywords=["bye", "goodbye"],
                 criterion="found",
@@ -87,7 +87,7 @@ def get_runnable_flow() -> WaldieFlow:
             model_ids=[],
             skills=[],
             nested_chats=[],
-            teachability=WaldieAgentTeachability(
+            teachability=HarmonyAgentTeachability(
                 enabled=False,
                 verbosity=0,
                 reset_db=False,
@@ -100,9 +100,9 @@ def get_runnable_flow() -> WaldieFlow:
         created_at="2021-01-01T00:00:00.000Z",
         updated_at="2021-01-01T00:00:00.000Z",
     )
-    chat = WaldieChat(
+    chat = HarmonyChat(
         id="wc-1",
-        data=WaldieChatData(
+        data=HarmonyChatData(
             name="chat_1",
             description="Description of chat 1",
             source="wa-1",
@@ -112,18 +112,18 @@ def get_runnable_flow() -> WaldieFlow:
             clear_history=True,
             silent=False,
             max_turns=2,
-            message=WaldieChatMessage(
+            message=HarmonyChatMessage(
                 type="string",
                 use_carryover=False,
                 content="Hello wa-1",
                 context={},
             ),
-            summary=WaldieChatSummary(
+            summary=HarmonyChatSummary(
                 method="last_msg",
                 prompt="",
                 args={},
             ),
-            nested_chat=WaldieChatNested(
+            nested_chat=HarmonyChatNested(
                 message=None,
                 reply=None,
             ),
@@ -131,18 +131,18 @@ def get_runnable_flow() -> WaldieFlow:
             real_target=None,
         ),
     )
-    agents = WaldieAgents(
+    agents = HarmonyAgents(
         users=[user],
         assistants=[assistant],
         managers=[],
         rag_users=[],
     )
-    flow = WaldieFlow(
+    flow = HarmonyFlow(
         id="wf-1",
         name="flow_name",
         type="flow",
         description="Flow Description",
-        data=WaldieFlowData(
+        data=HarmonyFlowData(
             nodes=[],
             edges=[],
             viewport={},
@@ -161,14 +161,14 @@ def get_runnable_flow() -> WaldieFlow:
 
 
 @pytest.fixture(scope="function")
-def waldie_flow() -> WaldieFlow:
-    """Get a valid, runnable WaldieFlow instance.
+def harmony_flow() -> HarmonyFlow:
+    """Get a valid, runnable HarmonyFlow instance.
 
     without models and skills
 
     Returns
     -------
-    WaldieFlow
-        A WaldieFlow instance.
+    HarmonyFlow
+        A HarmonyFlow instance.
     """
     return get_runnable_flow()

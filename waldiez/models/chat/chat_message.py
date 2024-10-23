@@ -5,14 +5,14 @@ from typing import Any, Dict, Optional, Tuple, Union
 from pydantic import Field
 from typing_extensions import Annotated, Literal
 
-from ..common import WaldieBase, WaldieMethodName, check_function
+from ..common import HarmonyBase, HarmonyMethodName, check_function
 
-WaldieChatMessageType = Literal[
+HarmonyChatMessageType = Literal[
     "string", "method", "rag_message_generator", "none"
 ]
 
 
-class WaldieChatMessage(WaldieBase):
+class HarmonyChatMessage(HarmonyBase):
     """
     Waldie Message.
 
@@ -27,7 +27,7 @@ class WaldieChatMessage(WaldieBase):
 
     Attributes
     ----------
-    type : WaldieChatMessageType
+    type : HarmonyChatMessageType
         The type of the message:
         - string
         - method
@@ -43,7 +43,7 @@ class WaldieChatMessage(WaldieBase):
     """
 
     type: Annotated[
-        WaldieChatMessageType,
+        HarmonyChatMessageType,
         Field(
             "none",
             title="Type",
@@ -90,9 +90,9 @@ def validate_message_dict(
         Literal["type", "use_carryover", "content", "context"],
         Union[Optional[str], Optional[bool], Optional[Dict[str, Any]]],
     ],
-    function_name: WaldieMethodName,
+    function_name: HarmonyMethodName,
     skip_definition: bool = False,
-) -> WaldieChatMessage:
+) -> HarmonyChatMessage:
     """Validate a message dict.
 
     Check the provided message dict.
@@ -103,14 +103,14 @@ def validate_message_dict(
     ----------
     value : dict
         The message dict.
-    function_name : str (WaldieMethodName)
+    function_name : str (HarmonyMethodName)
         The function name.
     skip_definition : bool, optional
         Skip the function definition in the content, by default False
 
     Returns
     -------
-    WaldieChatMessage
+    HarmonyChatMessage
         The validated message.
 
     Raises
@@ -126,20 +126,20 @@ def validate_message_dict(
             content = ""
         if use_carryover:
             method_content = _get_last_carryover_method_content(content)
-            return WaldieChatMessage(
+            return HarmonyChatMessage(
                 type="method",
                 use_carryover=True,
                 content=method_content,
                 context=context,
             )
-        return WaldieChatMessage(
+        return HarmonyChatMessage(
             type="string",
             use_carryover=False,
             content=content,
             context=context,
         )
     if message_type == "none":
-        return WaldieChatMessage(
+        return HarmonyChatMessage(
             type="none",
             use_carryover=False,
             content=None,
@@ -156,7 +156,7 @@ def validate_message_dict(
         if not valid:
             raise ValueError(error_or_content)
         message_content = error_or_content if skip_definition else content
-        return WaldieChatMessage(
+        return HarmonyChatMessage(
             type="method",
             use_carryover=use_carryover,
             content=message_content,
@@ -164,13 +164,13 @@ def validate_message_dict(
         )
     if message_type == "rag_message_generator":
         if use_carryover:
-            return WaldieChatMessage(
+            return HarmonyChatMessage(
                 type="method",
                 use_carryover=True,
                 content=RAG_METHOD_WITH_CARRYOVER,
                 context=context,
             )
-        return WaldieChatMessage(
+        return HarmonyChatMessage(
             type="rag_message_generator",
             use_carryover=use_carryover,
             content=None,

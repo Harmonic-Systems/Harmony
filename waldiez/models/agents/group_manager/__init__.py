@@ -1,19 +1,19 @@
 """Group chat manger agent."""
 
-from .group_manager import WaldieGroupManager
-from .group_manager_data import WaldieGroupManagerData
+from .group_manager import HarmonyGroupManager
+from .group_manager_data import HarmonyGroupManagerData
 from .speakers import (
-    WaldieGroupManagerSpeakers,
-    WaldieGroupManagerSpeakersSelectionMethod,
-    WaldieGroupManagerSpeakersSelectionMode,
-    WaldieGroupManagerSpeakersTransitionsType,
+    HarmonyGroupManagerSpeakers,
+    HarmonyGroupManagerSpeakersSelectionMethod,
+    HarmonyGroupManagerSpeakersSelectionMode,
+    HarmonyGroupManagerSpeakersTransitionsType,
 )
 
 __all__ = [
-    "WaldieGroupManager",
-    "WaldieGroupManagerData",
-    "WaldieGroupManagerSpeakers",
-    "WaldieGroupManagerSpeakersSelectionMethod",
-    "WaldieGroupManagerSpeakersSelectionMode",
-    "WaldieGroupManagerSpeakersTransitionsType",
+    "HarmonyGroupManager",
+    "HarmonyGroupManagerData",
+    "HarmonyGroupManagerSpeakers",
+    "HarmonyGroupManagerSpeakersSelectionMethod",
+    "HarmonyGroupManagerSpeakersSelectionMode",
+    "HarmonyGroupManagerSpeakersTransitionsType",
 ]

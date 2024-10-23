@@ -5,11 +5,11 @@ from typing import Dict, List
 from pydantic import Field, model_validator
 from typing_extensions import Annotated, Literal, Self
 
-from ..common import WaldieBase, now, parse_code_string
-from .skill_data import WaldieSkillData
+from ..common import HarmonyBase, now, parse_code_string
+from .skill_data import HarmonySkillData
 
 
-class WaldieSkill(WaldieBase):
+class HarmonySkill(HarmonyBase):
     """Waldie Skill.
 
     Attributes
@@ -30,8 +30,8 @@ class WaldieSkill(WaldieBase):
         The date and time when the skill was created.
     updated_at : str
         The date and time when the skill was last updated.
-    data : WaldieSkillData
-        The data of the skill. See `WaldieSkillData`.
+    data : HarmonySkillData
+        The data of the skill. See `HarmonySkillData`.
     """
 
     id: Annotated[
@@ -73,7 +73,7 @@ class WaldieSkill(WaldieBase):
         ),
     ]
     data: Annotated[
-        WaldieSkillData,
+        HarmonySkillData,
         Field(..., title="Data", description="The data of the skill."),
     ]
     created_at: Annotated[
@@ -99,7 +99,7 @@ class WaldieSkill(WaldieBase):
 
         Returns
         -------
-        WaldieSkill
+        HarmonySkill
             The skill.
 
         Raises

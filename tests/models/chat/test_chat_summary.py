@@ -2,20 +2,20 @@
 
 import pytest
 
-from harmony.models.chat.chat_summary import WaldieChatSummary
+from harmony.models.chat.chat_summary import HarmonyChatSummary
 
 
-def test_waldie_chat_summary() -> None:
-    """Test WaldieChatSummary."""
+def test_harmony_chat_summary() -> None:
+    """Test HarmonyChatSummary."""
     # Given
-    chat_summary = WaldieChatSummary(  # type: ignore
+    chat_summary = HarmonyChatSummary(  # type: ignore
         prompt="prompt",
     )
     assert chat_summary.prompt == "prompt"
     assert not chat_summary.args
 
     # Given
-    chat_summary = WaldieChatSummary(
+    chat_summary = HarmonyChatSummary(
         method="lastMsg",
         prompt="prompt",
         args={"key": "value"},
@@ -29,7 +29,7 @@ def test_waldie_chat_summary() -> None:
     assert summary_dump["method"] == "last_msg"
 
     # Given
-    chat_summary = WaldieChatSummary(
+    chat_summary = HarmonyChatSummary(
         method="reflectionWithLlm",
         prompt="prompt",
         args={"key": "value"},
@@ -41,4 +41,4 @@ def test_waldie_chat_summary() -> None:
     assert summary_dump["method"] == "reflection_with_llm"
 
     with pytest.raises(ValueError):
-        chat_summary = WaldieChatSummary(prompt=1)  # type: ignore
+        chat_summary = HarmonyChatSummary(prompt=1)  # type: ignore

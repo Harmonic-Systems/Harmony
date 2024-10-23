@@ -1,4 +1,4 @@
-"""Test WaldieRunner."""
+"""Test HarmonyRunner."""
 
 # pylint: disable=protected-access
 
@@ -6,37 +6,37 @@ from typing import Optional
 
 import pytest
 
-from harmony import Waldie, WaldieIOStream, WaldieRunner
-from harmony.models import WaldieFlow
+from harmony import Harmony, HarmonyIOStream, HarmonyRunner
+from harmony.models import HarmonyFlow
 
 
-def test_runner(waldie_flow: WaldieFlow) -> None:
-    """Test WaldieRunner.
+def test_runner(harmony_flow: HarmonyFlow) -> None:
+    """Test HarmonyRunner.
 
     Parameters
     ----------
-    waldie_flow : WaldieFlow
-        A WaldieFlow instance.
+    harmony_flow : HarmonyFlow
+        A HarmonyFlow instance.
     """
-    waldie = Waldie(flow=waldie_flow)
-    runner = WaldieRunner(waldie)
-    assert runner.waldie == waldie
+    harmony = Harmony(flow=harmony_flow)
+    runner = HarmonyRunner(harmony)
+    assert runner.harmony == harmony
     assert not runner.running
 
     prompt_input: Optional[str] = None
-    stream: WaldieIOStream
+    stream: HarmonyIOStream
 
     def on_prompt_input(prompt: str) -> None:
         nonlocal prompt_input, stream
         prompt_input = prompt
         stream.forward_input("Reply to prompt\n")
 
-    stream = WaldieIOStream(
+    stream = HarmonyIOStream(
         on_prompt_input=on_prompt_input,
         print_function=print,
         input_timeout=2,
     )
-    with WaldieIOStream.set_default(stream):
+    with HarmonyIOStream.set_default(stream):
         runner.run(stream)
     assert not runner.running
     assert runner._stream.get() is None
@@ -44,24 +44,24 @@ def test_runner(waldie_flow: WaldieFlow) -> None:
     stream.close()
 
 
-def test_waldie_with_invalid_requirement(
+def test_harmony_with_invalid_requirement(
     capsys: pytest.CaptureFixture[str],
-    waldie_flow: WaldieFlow,
+    harmony_flow: HarmonyFlow,
 ) -> None:
-    """Test Waldie with invalid requirement.
+    """Test Harmony with invalid requirement.
 
     Parameters
     ----------
     capsys : pytest.CaptureFixture[str]
         Pytest fixture to capture stdout and stderr.
-    waldie_flow : WaldieFlow
-        A WaldieFlow instance.
+    harmony_flow : HarmonyFlow
+        A HarmonyFlow instance.
     """
-    flow_dict = waldie_flow.model_dump(by_alias=True)
+    flow_dict = harmony_flow.model_dump(by_alias=True)
     # add an invalid requirement
     flow_dict["requirements"] = ["invalid_requirement"]
-    waldie = Waldie.from_dict(data=flow_dict)
-    runner = WaldieRunner(waldie)
+    harmony = Harmony.from_dict(data=flow_dict)
+    runner = HarmonyRunner(harmony)
     runner._install_requirements()
     std_err = capsys.readouterr().out
     assert (

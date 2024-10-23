@@ -1,15 +1,15 @@
 """Harmony package."""
 
 from ._version import __version__
-from .exporter import WaldieExporter
-from .io_stream import WaldieIOStream
-from .runner import WaldieRunner
-from .waldie import Waldie
+from .exporter import HarmonyExporter
+from .io_stream import HarmonyIOStream
+from .models import Harmony
+from .runner import HarmonyRunner
 
 __all__ = [
-    "Waldie",
-    "WaldieExporter",
-    "WaldieIOStream",
-    "WaldieRunner",
+    "Harmony",
+    "HarmonyExporter",
+    "HarmonyIOStream",
+    "HarmonyRunner",
     "__version__",
 ]

@@ -3,22 +3,22 @@
 from pydantic import Field
 from typing_extensions import Annotated, Literal
 
-from ..agent import WaldieAgent
-from .assistant_data import WaldieAssistantData
+from ..agent import HarmonyAgent
+from .assistant_data import HarmonyAssistantData
 
 
-class WaldieAssistant(WaldieAgent):
+class HarmonyAssistant(HarmonyAgent):
     """Assistant agent model.
 
-    A `WaldieAgent` with agent_type `assistant` and
+    A `HarmonyAgent` with agent_type `assistant` and
     default `human_input_mode`: `"NEVER"`
-    See `WaldieAgent`, `WaldieAssistantData`, `WaldieAgentData` for more info.
+    See `HarmonyAgent`,`HarmonyAssistantData`,`HarmonyAgentData` for more info.
 
     Attributes
     ----------
     agent_type : Literal["assistant"]
         The agent type: 'assistant' for an assistant agent
-    data : WaldieAssistantData
+    data : HarmonyAssistantData
         The assistant agent's data
     """
 
@@ -32,10 +32,10 @@ class WaldieAssistant(WaldieAgent):
         ),
     ]
     data: Annotated[
-        WaldieAssistantData,
+        HarmonyAssistantData,
         Field(
             title="Data",
             description="The assistant agent's data",
-            default_factory=WaldieAssistantData,
+            default_factory=HarmonyAssistantData,
         ),
     ]

@@ -1,11 +1,11 @@
 """Waldie model."""
 
-from .model import WaldieModel
-from .model_data import WaldieModelAPIType, WaldieModelData, WaldieModelPrice
+from .model import HarmonyModel
+from .model_data import HarmonyModelAPIType, HarmonyModelData, HarmonyModelPrice
 
 __all__ = [
-    "WaldieModel",
-    "WaldieModelData",
-    "WaldieModelPrice",
-    "WaldieModelAPIType",
+    "HarmonyModel",
+    "HarmonyModelData",
+    "HarmonyModelPrice",
+    "HarmonyModelAPIType",
 ]

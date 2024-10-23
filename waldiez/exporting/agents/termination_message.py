@@ -2,17 +2,17 @@
 
 from typing import Tuple
 
-from harmony.models import WaldieAgent
+from harmony.models import HarmonyAgent
 
 
 def get_is_termination_message(
-    agent: WaldieAgent, agent_name: str
+    agent: HarmonyAgent, agent_name: str
 ) -> Tuple[str, str]:
     """Get the `is_termination_message` argument and content (if any).
 
     Parameters
     ----------
-    agent : WaldieAgent
+    agent : HarmonyAgent
         The agent.
     agent_name : str
         The agent name.

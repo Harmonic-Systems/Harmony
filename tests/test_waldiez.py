@@ -1,4 +1,4 @@
-"""Test harmony.waldie.*."""
+"""Test harmony.harmony.*."""
 
 import os
 import tempfile
@@ -6,48 +6,48 @@ import tempfile
 import pytest
 from autogen.version import __version__ as autogen_version  # type: ignore
 
-from harmony import Waldie
+from harmony import Harmony
 
 from .exporting.flow_helpers import get_flow
 
 
-def test_waldie() -> None:
-    """Test Waldie with retrievechat requirement."""
+def test_harmony() -> None:
+    """Test Harmony with retrievechat requirement."""
     flow = get_flow()
-    waldie = Waldie(flow=flow)
-    assert waldie.name == flow.name
+    harmony = Harmony(flow=flow)
+    assert harmony.name == flow.name
 
-    flow_dump = waldie.model_dump_json(by_alias=True)
+    flow_dump = harmony.model_dump_json(by_alias=True)
     with tempfile.NamedTemporaryFile(
         "w", suffix=".harmony", delete=False
     ) as file:
         file.write(flow_dump)
         file_path = file.name
         file.close()
-    waldie2 = Waldie.load(file_path)
+    harmony2 = Harmony.load(file_path)
     os.remove(file_path)
-    assert waldie2.name == flow.name
-    assert waldie2.description == flow.description
-    assert waldie2.tags == flow.tags
-    assert next(waldie2.models)
-    assert waldie2.has_rag_agents
-    skill = next(waldie2.skills)
+    assert harmony2.name == flow.name
+    assert harmony2.description == flow.description
+    assert harmony2.tags == flow.tags
+    assert next(harmony2.models)
+    assert harmony2.has_rag_agents
+    skill = next(harmony2.skills)
     assert (
         f"autogen-agentchat[retrievechat]=={autogen_version}"
-        in waldie2.requirements
+        in harmony2.requirements
     )
     assert "SKILL_KEY" in skill.secrets
-    assert "SKILL_KEY" == waldie2.get_flow_env_vars()[0][0]
-    for agent in waldie2.agents:
+    assert "SKILL_KEY" == harmony2.get_flow_env_vars()[0][0]
+    for agent in harmony2.agents:
         if agent.agent_type == "manager":
-            assert waldie2.get_group_chat_members(agent)
+            assert harmony2.get_group_chat_members(agent)
         else:
-            assert not waldie2.get_group_chat_members(agent)
-    assert waldie2.chats
+            assert not harmony2.get_group_chat_members(agent)
+    assert harmony2.chats
 
 
-def test_waldie_without_rag() -> None:
-    """Test Waldie."""
+def test_harmony_without_rag() -> None:
+    """Test Harmony."""
     flow_dict = get_flow().model_dump(by_alias=True)
     # remove the rag user from the agents
     flow_dict["data"]["agents"]["ragUsers"] = []
@@ -60,26 +60,26 @@ def test_waldie_without_rag() -> None:
             and chat["data"]["target"] != "wa-4"
         )
     ]
-    waldie = Waldie.from_dict(data=flow_dict)
-    assert waldie.name == flow_dict["name"]
-    assert waldie.description == flow_dict["description"]
-    assert waldie.tags == flow_dict["tags"]
-    assert next(waldie.models)
-    assert not waldie.has_rag_agents
+    harmony = Harmony.from_dict(data=flow_dict)
+    assert harmony.name == flow_dict["name"]
+    assert harmony.description == flow_dict["description"]
+    assert harmony.tags == flow_dict["tags"]
+    assert next(harmony.models)
+    assert not harmony.has_rag_agents
     assert (
         f"autogen-agentchat[retrievechat]=={autogen_version}"
-        not in waldie.requirements
+        not in harmony.requirements
     )
-    assert f"autogen-agentchat=={autogen_version}" in waldie.requirements
+    assert f"autogen-agentchat=={autogen_version}" in harmony.requirements
 
 
-def test_waldie_errors() -> None:
-    """Test Waldie errors."""
+def test_harmony_errors() -> None:
+    """Test Harmony errors."""
     with pytest.raises(ValueError):
-        Waldie.load("non_existent_file")
+        Harmony.load("non_existent_file")
 
     with pytest.raises(ValueError):
-        Waldie.from_dict(
+        Harmony.from_dict(
             name="flow",
             description="flow description",
             tags=["tag"],
@@ -88,12 +88,12 @@ def test_waldie_errors() -> None:
         )
 
     with pytest.raises(ValueError):
-        Waldie.from_dict(
+        Harmony.from_dict(
             data={"type": "flow", "data": {}},
         )
 
     with pytest.raises(ValueError):
-        Waldie.from_dict(
+        Harmony.from_dict(
             data={"type": "other", "data": {}},
         )
 
@@ -104,5 +104,5 @@ def test_waldie_errors() -> None:
         file_path = file.name
         file.close()
     with pytest.raises(ValueError):
-        Waldie.load(file_path)
+        Harmony.load(file_path)
     os.remove(file_path)

@@ -1,13 +1,13 @@
 """Test harmony.models.agents.agent.code_execution.*."""
 
 from harmony.models.agents.agent.code_execution import (
-    WaldieAgentCodeExecutionConfig,
+    HarmonyAgentCodeExecutionConfig,
 )
 
 
-def test_waldie_agent_code_execution() -> None:
-    """Test WaldieAgentCodeExecution."""
-    code_execution = WaldieAgentCodeExecutionConfig(
+def test_harmony_agent_code_execution() -> None:
+    """Test HarmonyAgentCodeExecution."""
+    code_execution = HarmonyAgentCodeExecutionConfig(
         work_dir="work_dir",
         use_docker=True,
         timeout=60,

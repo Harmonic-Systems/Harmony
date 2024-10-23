@@ -3,10 +3,10 @@
 from pydantic import Field
 from typing_extensions import Annotated
 
-from ...common import WaldieBase
+from ...common import HarmonyBase
 
 
-class WaldieAgentLinkedSkill(WaldieBase):
+class HarmonyAgentLinkedSkill(HarmonyBase):
     """Waldie Agent Linked Skill.
 
     Attributes

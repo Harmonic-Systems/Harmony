@@ -7,17 +7,17 @@ from ..utils import (
 )
 
 
-def get_def_main(waldie_chats: str) -> str:
+def get_def_main(harmony_chats: str) -> str:
     """Get the main function.
 
-    When exporting to python, waldie_chats string will be the
+    When exporting to python, harmony_chats string will be the
     content of the main function. It contains either a
     `{sender.initiate_chat(recipient, ...)}` (if there is only one chat)
     or `initiate_chats([..])`, with the list of chats to initiate.
 
     Parameters
     ----------
-    waldie_chats : str
+    harmony_chats : str
         The content of the main function.
 
     Returns
@@ -30,7 +30,7 @@ def get_def_main(waldie_chats: str) -> str:
     \"\"\"Start chatting.\"\"\"
 """
     content += get_logging_start_string(1)
-    content += f"    results = {waldie_chats}" + "\n"
+    content += f"    results = {harmony_chats}" + "\n"
     content += get_logging_stop_string(1) + "\n"
     content += get_sqlite_to_csv_call_string(1) + "\n"
     content += "    return results\n"

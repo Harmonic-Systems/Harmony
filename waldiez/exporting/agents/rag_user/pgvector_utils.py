@@ -2,15 +2,15 @@
 
 from typing import Set, Tuple
 
-from harmony.models import WaldieRagUser
+from harmony.models import HarmonyRagUser
 
 
-def _get_pgvector_client_string(agent: WaldieRagUser) -> Tuple[str, str]:
+def _get_pgvector_client_string(agent: HarmonyRagUser) -> Tuple[str, str]:
     """Get the PGVectorDB client string.
 
     Parameters
     ----------
-    agent : WaldieRagUser
+    agent : HarmonyRagUser
         The agent.
 
     Returns
@@ -26,13 +26,13 @@ def _get_pgvector_client_string(agent: WaldieRagUser) -> Tuple[str, str]:
 
 
 def _get_pgvector_embedding_function_string(
-    agent: WaldieRagUser, agent_name: str
+    agent: HarmonyRagUser, agent_name: str
 ) -> Tuple[str, str, str]:
     """Get the PGVectorDB embedding function string.
 
     Parameters
     ----------
-    agent : WaldieRagUser
+    agent : HarmonyRagUser
         The agent.
     agent_name : str
         The agent's name.
@@ -61,13 +61,13 @@ def _get_pgvector_embedding_function_string(
 
 
 def get_pgvector_db_args(
-    agent: WaldieRagUser, agent_name: str
+    agent: HarmonyRagUser, agent_name: str
 ) -> Tuple[str, Set[str], str]:
     """Get the kwargs to use for PGVectorDB.
 
     Parameters
     ----------
-    agent : WaldieRagUser
+    agent : HarmonyRagUser
         The agent.
     agent_name : str
         The agent's name.

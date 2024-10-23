@@ -11,7 +11,7 @@ export_skills
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple, Union
 
-from harmony.models import WaldieSkill
+from harmony.models import HarmonySkill
 
 from ..utils import get_escaped_string
 
@@ -70,7 +70,7 @@ def get_agent_skill_registration(
 
 
 def export_skills(
-    skills: List[WaldieSkill],
+    skills: List[HarmonySkill],
     skill_names: Dict[str, str],
     output_dir: Optional[Union[str, Path]] = None,
 ) -> Tuple[Set[str], Set[Tuple[str, str]]]:
@@ -80,7 +80,7 @@ def export_skills(
 
     Parameters
     ----------
-    skills : List[WaldieSkill]
+    skills : List[HarmonySkill]
         The skills.
     skill_names : Dict[str, str]
         The skill names.
@@ -96,14 +96,14 @@ def export_skills(
     Example
     -------
     ```python
-    >>> from harmony.models import WaldieSkill, WaldieSkillData
-    >>> skill1 = WaldieSkill(
+    >>> from harmony.models import HarmonySkill, HarmonySkillData
+    >>> skill1 = HarmonySkill(
     ...     id="ws-1",
     ...     name="skill1",
     ...     description="A skill that does something.",
     ...     tags=["skill", "skill1"],
     ...     requirements=[],
-    ...     data=WaldieSkillData(
+    ...     data=HarmonySkillData(
     ...         content="def skill1():\\n    pass",
     ...         secrets={"API_KEY": "1234567890"},
     ... )

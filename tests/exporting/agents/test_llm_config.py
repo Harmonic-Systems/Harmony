@@ -1,13 +1,13 @@
 """Test harmony.exporting.agents.llm_config.*."""
 
 from harmony.exporting.agents.llm_config import get_agent_llm_config
-from harmony.models import WaldieAgent, WaldieModel, WaldieModelData
+from harmony.models import HarmonyAgent, HarmonyModel, HarmonyModelData
 
 
 def test_get_agent_llm_config() -> None:
     """Test get_agent_llm_config()."""
     # Given
-    agent = WaldieAgent(  # type: ignore
+    agent = HarmonyAgent(  # type: ignore
         id="wa-1",
         name="agent_name",
         agent_type="assistant",
@@ -16,14 +16,14 @@ def test_get_agent_llm_config() -> None:
         },
     )
     model_names = {"wm-1": "model_name"}
-    model = WaldieModel(
+    model = HarmonyModel(
         id="wm-1",
         name="model_name",
         type="model",
         description="A model for llamas :P.",
         tags=["llama", "llama3.1"],
         requirements=[],
-        data=WaldieModelData(
+        data=HarmonyModelData(
             base_url="https://example.com/v1",
             api_key="1234567890",
             api_type="openai",
@@ -51,7 +51,7 @@ def test_get_agent_llm_config() -> None:
     assert output[0] == expected_output
     assert not output[1]
     # When
-    agent = WaldieAgent(  # type: ignore
+    agent = HarmonyAgent(  # type: ignore
         id="wa-1",
         name="agent_name",
         agent_type="assistant",
@@ -60,14 +60,14 @@ def test_get_agent_llm_config() -> None:
         },
     )
     model_names = {"wm-1": "model_name_1", "wm-2": "model_name_2"}
-    model1 = WaldieModel(
+    model1 = HarmonyModel(
         id="wm-1",
         name="model_name_1",
         type="model",
         description="A model for llamas :P.",
         tags=["llama", "llama3.1"],
         requirements=[],
-        data=WaldieModelData(
+        data=HarmonyModelData(
             base_url="https://example.com/v8",
             api_key="1234567890",
             api_type="openai",
@@ -82,14 +82,14 @@ def test_get_agent_llm_config() -> None:
             },
         ),
     )
-    model2 = WaldieModel(
+    model2 = HarmonyModel(
         id="wm-2",
         name="model_name_2",
         type="model",
         description="A model for llamas :P.",
         tags=["llama", "llama3.2"],
         requirements=[],
-        data=WaldieModelData(
+        data=HarmonyModelData(
             base_url="https://example.com/v9",
             api_key="1234567890",
             api_type="openai",

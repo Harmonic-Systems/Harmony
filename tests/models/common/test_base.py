@@ -1,18 +1,18 @@
 """Test harmony.models.common.base."""
 
-from harmony.models.common.base import WaldieBase
+from harmony.models.common.base import HarmonyBase
 
 
-class WaldieTestModel(WaldieBase):
+class HarmonyTestModel(HarmonyBase):
     """Test model."""
 
     in_snake_case: str
 
 
-def test_waldie_base() -> None:
+def test_harmony_base() -> None:
     """Test mode dumps."""
     # Given
-    test_model = WaldieTestModel(in_snake_case="test")
+    test_model = HarmonyTestModel(in_snake_case="test")
     # When
     model_dump = test_model.model_dump()
     model_dump_string = test_model.model_dump_json()

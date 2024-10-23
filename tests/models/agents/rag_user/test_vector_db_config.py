@@ -5,13 +5,13 @@ import os
 import pytest
 
 from harmony.models.agents.rag_user.vector_db_config import (
-    WaldieRagUserVectorDbConfig,
+    HarmonyRagUserVectorDbConfig,
 )
 
 
-def test_waldie_rag_user_vector_db_config() -> None:
-    """Test WaldieRagUserVectorDbConfig."""
-    vector_db_config = WaldieRagUserVectorDbConfig(
+def test_harmony_rag_user_vector_db_config() -> None:
+    """Test HarmonyRagUserVectorDbConfig."""
+    vector_db_config = HarmonyRagUserVectorDbConfig(
         model="all-MiniLM-L6-v2",
         use_memory=True,
         use_local_storage=False,
@@ -31,9 +31,9 @@ def test_waldie_rag_user_vector_db_config() -> None:
     assert vector_db_config.metadata == {}
 
 
-def test_waldie_rag_user_vector_db_config_local_storage() -> None:
-    """Test WaldieRagUserVectorDbConfig with local storage."""
-    vector_db_config = WaldieRagUserVectorDbConfig(
+def test_harmony_rag_user_vector_db_config_local_storage() -> None:
+    """Test HarmonyRagUserVectorDbConfig with local storage."""
+    vector_db_config = HarmonyRagUserVectorDbConfig(
         model="all-MiniLM-L6-v2",
         use_memory=False,
         use_local_storage=True,
@@ -53,7 +53,7 @@ def test_waldie_rag_user_vector_db_config_local_storage() -> None:
     assert vector_db_config.metadata == {}
 
     with pytest.raises(ValueError):
-        WaldieRagUserVectorDbConfig(
+        HarmonyRagUserVectorDbConfig(
             model="all-MiniLM-L6-v2",
             use_memory=False,
             use_local_storage=True,

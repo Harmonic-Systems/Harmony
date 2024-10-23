@@ -2,17 +2,17 @@
 
 from typing import Dict, Tuple
 
-from harmony.models import WaldieAgent
+from harmony.models import HarmonyAgent
 
 
 def get_agent_code_execution_config(
-    agent: WaldieAgent, agent_name: str, skill_names: Dict[str, str]
+    agent: HarmonyAgent, agent_name: str, skill_names: Dict[str, str]
 ) -> Tuple[str, str, str]:
     """Get the code execution config for the agent.
 
     Parameters
     ----------
-    agent : WaldieAgent
+    agent : HarmonyAgent
         The agent.
     agent_name : str
         The agent name.

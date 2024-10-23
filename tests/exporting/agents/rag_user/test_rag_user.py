@@ -8,10 +8,10 @@ from harmony.exporting.agents.rag_user.rag_user import (
     get_rag_user_retrieve_config_str,
 )
 from harmony.models import (
-    WaldieRagUser,
-    WaldieRagUserData,
-    WaldieRagUserRetrieveConfig,
-    WaldieRagUserVectorDbConfig,
+    HarmonyRagUser,
+    HarmonyRagUserData,
+    HarmonyRagUserRetrieveConfig,
+    HarmonyRagUserVectorDbConfig,
 )
 
 # pylint: disable=line-too-long
@@ -22,9 +22,9 @@ def _get_rag_user(
     custom_embedding: Optional[str] = None,
     custom_token_count: Optional[str] = None,
     custom_text_split: Optional[str] = None,
-) -> WaldieRagUser:
+) -> HarmonyRagUser:
     """Get a RAG user agent."""
-    return WaldieRagUser(
+    return HarmonyRagUser(
         id="wa-1",
         name="rag_user",
         description="A RAG user agent.",
@@ -32,11 +32,11 @@ def _get_rag_user(
         agent_type="rag_user",
         tags=[],
         requirements=[],
-        data=WaldieRagUserData(  # type: ignore
+        data=HarmonyRagUserData(  # type: ignore
             model_ids=["wm-1"],
-            retrieve_config=WaldieRagUserRetrieveConfig(  # type: ignore
+            retrieve_config=HarmonyRagUserRetrieveConfig(  # type: ignore
                 vector_db="chroma",
-                db_config=WaldieRagUserVectorDbConfig(  # type: ignore
+                db_config=HarmonyRagUserVectorDbConfig(  # type: ignore
                     use_local_storage=local_path is not None,
                     local_storage_path=local_path,
                 ),

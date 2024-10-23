@@ -5,14 +5,14 @@ from typing import List
 from pydantic import Field
 from typing_extensions import Annotated, Literal
 
-from ...common import WaldieBase, now
-from .agent_data import WaldieAgentData
-from .code_execution import WaldieAgentCodeExecutionConfig
+from ...common import HarmonyBase, now
+from .agent_data import HarmonyAgentData
+from .code_execution import HarmonyAgentCodeExecutionConfig
 
-WaldieAgentType = Literal["user", "assistant", "manager", "rag_user"]
+HarmonyAgentType = Literal["user", "assistant", "manager", "rag_user"]
 
 
-class WaldieAgent(WaldieBase):
+class HarmonyAgent(HarmonyBase):
     """Waldie Agent.
 
     Attributes
@@ -35,9 +35,9 @@ class WaldieAgent(WaldieBase):
         The date and time when the agent was created.
     updated_at : str
         The date and time when the agent was last updated.
-    data: WaldieAgentData
+    data: HarmonyAgentData
         The data (properties) of this agent.
-        See `harmony.models.agents.WaldieAgentData` for more info.
+        See `harmony.models.agents.HarmonyAgentData` for more info.
 
     Functions
     ---------
@@ -110,11 +110,11 @@ class WaldieAgent(WaldieBase):
         ),
     ]
     data: Annotated[
-        WaldieAgentData,
+        HarmonyAgentData,
         Field(
             title="Data",
             description="The data (properties) of the agent",
-            default_factory=WaldieAgentData,
+            default_factory=HarmonyAgentData,
         ),
     ]
 
@@ -181,7 +181,7 @@ class WaldieAgent(WaldieBase):
         """
         # if the config dict has functions, make sure they can be found
         if isinstance(
-            self.data.code_execution_config, WaldieAgentCodeExecutionConfig
+            self.data.code_execution_config, HarmonyAgentCodeExecutionConfig
         ):
             for function in self.data.code_execution_config.functions:
                 if function not in skill_ids:

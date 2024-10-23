@@ -5,16 +5,16 @@ from typing import Optional
 from pydantic import Field
 from typing_extensions import Annotated, Literal
 
-from ..agent import WaldieAgentData
-from .speakers import WaldieGroupManagerSpeakers
+from ..agent import HarmonyAgentData
+from .speakers import HarmonyGroupManagerSpeakers
 
 
-class WaldieGroupManagerData(WaldieAgentData):
+class HarmonyGroupManagerData(HarmonyAgentData):
     """Group chat manager data class.
 
     The data for an agent with `human_input_mode` set to "NEVER" as default.
     and the chat group's related extra properties.
-    See the parent's docs (`WaldieAgentData`) for the rest of the properties.
+    See the parent's docs (`HarmonyAgentData`) for the rest of the properties.
 
     Attributes
     ----------
@@ -25,7 +25,7 @@ class WaldieGroupManagerData(WaldieAgentData):
     admin_name : Optional[str]
         The name of the group's admin.
         Make sure you use a name of an agent in the group.
-    speakers : WaldieGroupManagerSpeakers
+    speakers : HarmonyGroupManagerSpeakers
         The rules for the speaker selection and repetition
     enable_clear_history : Optional[bool]
         Enable clearing the history in the chat group.
@@ -64,11 +64,11 @@ class WaldieGroupManagerData(WaldieAgentData):
         ),
     ]
     speakers: Annotated[
-        WaldieGroupManagerSpeakers,
+        HarmonyGroupManagerSpeakers,
         Field(
             title="Speakers",
             description="The rules for the speaker selection and repetition",
-            default_factory=WaldieGroupManagerSpeakers,
+            default_factory=HarmonyGroupManagerSpeakers,
         ),
     ]
     enable_clear_history: Annotated[
