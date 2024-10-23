@@ -4,24 +4,24 @@ from typing import List
 
 from harmony.exporting.agents.agent import export_agent, get_agent_class_name
 from harmony.models import (
-    WaldieAgent,
-    WaldieAgentCodeExecutionConfig,
-    WaldieAgentLinkedSkill,
-    WaldieAgentTeachability,
-    WaldieAgentTerminationMessage,
-    WaldieAssistant,
-    WaldieAssistantData,
-    WaldieGroupManager,
-    WaldieGroupManagerData,
-    WaldieGroupManagerSpeakers,
-    WaldieModel,
-    WaldieRagUser,
-    WaldieRagUserData,
-    WaldieRagUserRetrieveConfig,
-    WaldieRagUserVectorDbConfig,
-    WaldieSkill,
-    WaldieSkillData,
-    WaldieUserProxy,
+    HarmonyAgent,
+    HarmonyAgentCodeExecutionConfig,
+    HarmonyAgentLinkedSkill,
+    HarmonyAgentTeachability,
+    HarmonyAgentTerminationMessage,
+    HarmonyAssistant,
+    HarmonyAssistantData,
+    HarmonyGroupManager,
+    HarmonyGroupManagerData,
+    HarmonyGroupManagerSpeakers,
+    HarmonyModel,
+    HarmonyRagUser,
+    HarmonyRagUserData,
+    HarmonyRagUserRetrieveConfig,
+    HarmonyRagUserVectorDbConfig,
+    HarmonySkill,
+    HarmonySkillData,
+    HarmonyUserProxy,
 )
 
 # pylint: disable=line-too-long
@@ -30,19 +30,19 @@ from harmony.models import (
 def test_get_agent_class_name() -> None:
     """Test get_agent_class_name()."""
     # Given
-    user_proxy = WaldieUserProxy(  # type: ignore
+    user_proxy = HarmonyUserProxy(  # type: ignore
         id="wa-1",
         name="user_proxy",
     )
-    assistant = WaldieAssistant(  # type: ignore
+    assistant = HarmonyAssistant(  # type: ignore
         id="wa-2",
         name="assistant",
     )
-    group_manager = WaldieGroupManager(  # type: ignore
+    group_manager = HarmonyGroupManager(  # type: ignore
         id="wa-3",
         name="group_manager",
     )
-    rag_user = WaldieRagUser(  # type: ignore
+    rag_user = HarmonyRagUser(  # type: ignore
         id="wa-4",
         name="rag_user",
     )
@@ -61,7 +61,7 @@ def test_get_agent_class_name() -> None:
 def test_export_agent() -> None:
     """Test export_agent()."""
     # Given
-    user_proxy = WaldieUserProxy(  # type: ignore
+    user_proxy = HarmonyUserProxy(  # type: ignore
         id="wa-1",
         name="user_proxy",
         agent_type="user",
@@ -69,9 +69,9 @@ def test_export_agent() -> None:
     agent_names = {"wa-1": "user_proxy"}
     model_names = {"wm-1": "model_1"}
     skill_names = {"ws-1": "skill_1"}
-    all_skills: List[WaldieSkill] = []
-    all_models: List[WaldieModel] = []
-    group_chat_members: List[WaldieAgent] = []
+    all_skills: List[HarmonySkill] = []
+    all_models: List[HarmonyModel] = []
+    group_chat_members: List[HarmonyAgent] = []
     # When
     (
         agent_string,
@@ -112,13 +112,13 @@ def test_export_agent_custom_termination() -> None:
         "def is_termination_message(message):\n"
         '    return "goodbye" in message.lower()\n'
     )
-    assistant = WaldieAssistant(  # type: ignore
+    assistant = HarmonyAssistant(  # type: ignore
         id="wa-1",
         name="assistant",
         description="Agent's description",
         agent_type="assistant",
-        data=WaldieAssistantData(  # type: ignore
-            termination=WaldieAgentTerminationMessage(
+        data=HarmonyAssistantData(  # type: ignore
+            termination=HarmonyAgentTerminationMessage(
                 type="method",
                 keywords=[],
                 criterion=None,
@@ -129,9 +129,9 @@ def test_export_agent_custom_termination() -> None:
     agent_names = {"wa-1": "assistant"}
     model_names = {"wm-1": "model_1"}
     skill_names = {"ws-1": "skill_1"}
-    all_skills: List[WaldieSkill] = []
-    all_models: List[WaldieModel] = []
-    group_chat_members: List[WaldieAgent] = []
+    all_skills: List[HarmonySkill] = []
+    all_models: List[HarmonyModel] = []
+    group_chat_members: List[HarmonyAgent] = []
     # When
     (
         agent_string,
@@ -174,11 +174,11 @@ assistant = AssistantAgent(
 
 def test_export_group_manager() -> None:
     """Test export_agent() with group manager."""
-    user = WaldieUserProxy(  # type: ignore
+    user = HarmonyUserProxy(  # type: ignore
         id="wa-1",
         name="user",
     )
-    assistant = WaldieAssistant(  # type: ignore
+    assistant = HarmonyAssistant(  # type: ignore
         id="wa-2",
         name="assistant",
     )
@@ -186,13 +186,13 @@ def test_export_group_manager() -> None:
         "def custom_speaker_selection(last_speaker, groupchat):\n"
         "    return last_speaker"
     )
-    manager = WaldieGroupManager(  # type: ignore
+    manager = HarmonyGroupManager(  # type: ignore
         id="wa-3",
         name="group_manager",
-        data=WaldieGroupManagerData(  # type: ignore
+        data=HarmonyGroupManagerData(  # type: ignore
             agent_default_auto_reply="I am the group manager.",
             enable_clear_history=True,
-            speakers=WaldieGroupManagerSpeakers(
+            speakers=HarmonyGroupManagerSpeakers(
                 selection_method="custom",
                 selection_custom_method=custom_speaker_selection,
                 max_retries_for_selecting=3,
@@ -206,9 +206,9 @@ def test_export_group_manager() -> None:
     agent_names = {"wa-1": "user", "wa-2": "assistant", "wa-3": "group_manager"}
     model_names = {"wm-1": "model_1"}
     skill_names = {"ws-1": "skill_1"}
-    all_skills: List[WaldieSkill] = []
-    all_models: List[WaldieModel] = []
-    group_chat_members: List[WaldieAgent] = [user, assistant]
+    all_skills: List[HarmonySkill] = []
+    all_models: List[HarmonyModel] = []
+    group_chat_members: List[HarmonyAgent] = [user, assistant]
     # When
     (
         agent_string,
@@ -272,11 +272,11 @@ group_manager = GroupChatManager(
 
 def test_export_rag_user() -> None:
     """Test export_agent() RAG user."""
-    user = WaldieUserProxy(  # type: ignore
+    user = HarmonyUserProxy(  # type: ignore
         id="wa-1",
         name="user",
     )
-    assistant = WaldieAssistant(  # type: ignore
+    assistant = HarmonyAssistant(  # type: ignore
         id="wa-2",
         name="assistant",
     )
@@ -286,10 +286,10 @@ def test_export_rag_user() -> None:
         "    from sentence_transformers import SentenceTransformer\n"
         '    return SentenceTransformer("model").encode\n'
     )
-    rag_user = WaldieRagUser(  # type: ignore
+    rag_user = HarmonyRagUser(  # type: ignore
         id="wa-3",
         name="rag_user",
-        data=WaldieRagUserData(
+        data=HarmonyRagUserData(
             agent_default_auto_reply="I am the RAG user.",
             human_input_mode="ALWAYS",
             system_message="Do stuff using docs.",
@@ -297,14 +297,14 @@ def test_export_rag_user() -> None:
             max_consecutive_auto_reply=2,
             model_ids=[],
             skills=[],
-            teachability=WaldieAgentTeachability(
+            teachability=HarmonyAgentTeachability(
                 enabled=False,
                 verbosity=0,
                 reset_db=False,
                 recall_threshold=0.0,
                 max_num_retrievals=0,
             ),
-            termination=WaldieAgentTerminationMessage(
+            termination=HarmonyAgentTerminationMessage(
                 type="keyword",
                 keywords=["goodbye"],
                 criterion="exact",
@@ -312,7 +312,7 @@ def test_export_rag_user() -> None:
             ),
             code_execution_config=False,
             nested_chats=[],
-            retrieve_config=WaldieRagUserRetrieveConfig(
+            retrieve_config=HarmonyRagUserRetrieveConfig(
                 task="default",
                 vector_db="qdrant",
                 docs_path=None,
@@ -338,7 +338,7 @@ def test_export_rag_user() -> None:
                 recursive=True,
                 distance_threshold=-1,
                 n_results=None,
-                db_config=WaldieRagUserVectorDbConfig(
+                db_config=HarmonyRagUserVectorDbConfig(
                     model=None,
                     use_local_storage=False,
                     use_memory=True,
@@ -358,19 +358,19 @@ def test_export_rag_user() -> None:
     agent_names = {"wa-1": "user", "wa-2": "assistant", "wa-3": "rag_user"}
     model_names = {"wm-1": "model_1"}
     skill_names = {"ws-1": "skill_1"}
-    all_skills: List[WaldieSkill] = [
-        WaldieSkill(  # type: ignore
+    all_skills: List[HarmonySkill] = [
+        HarmonySkill(  # type: ignore
             id="ws-1",
             name="skill_1",
             description="Skill's description",
-            data=WaldieSkillData(
+            data=HarmonySkillData(
                 content="def skill_1():\n    return 'skill_1'",
                 secrets={},
             ),
         )
     ]
-    all_models: List[WaldieModel] = []
-    group_chat_members: List[WaldieAgent] = [user, assistant]
+    all_models: List[HarmonyModel] = []
+    group_chat_members: List[HarmonyAgent] = [user, assistant]
     # When
     (
         agent_string,
@@ -444,39 +444,39 @@ rag_user = RetrieveUserProxyAgent(
 
 def test_export_agent_with_skills_and_code_execution() -> None:
     """Test export_agent() with skills."""
-    user = WaldieUserProxy(  # type: ignore
+    user = HarmonyUserProxy(  # type: ignore
         id="wa-1",
         name="user",
     )
-    assistant_skill = WaldieSkill(  # type: ignore
+    assistant_skill = HarmonySkill(  # type: ignore
         id="ws-1",
         name="skill_1",
         description="Skill's description",
-        data=WaldieSkillData(
+        data=HarmonySkillData(
             content="def skill_1():\n    return 'skill_1'",
             secrets={},
         ),
     )
-    assistant = WaldieAssistant(  # type: ignore
+    assistant = HarmonyAssistant(  # type: ignore
         id="wa-2",
         name="assistant",
-        data=WaldieAssistantData(  # type: ignore
-            code_execution_config=WaldieAgentCodeExecutionConfig(
+        data=HarmonyAssistantData(  # type: ignore
+            code_execution_config=HarmonyAgentCodeExecutionConfig(
                 work_dir="coding",
                 use_docker=False,
                 timeout=10,
                 last_n_messages=5,
                 functions=["ws-1"],
             ),
-            skills=[WaldieAgentLinkedSkill(id="ws-1", executor_id="wa-1")],
+            skills=[HarmonyAgentLinkedSkill(id="ws-1", executor_id="wa-1")],
         ),
     )
     agent_names = {"wa-1": "user", "wa-2": "assistant"}
     model_names = {"wm-1": "model_1"}
     skill_names = {"ws-1": "skill_1"}
-    all_skills: List[WaldieSkill] = [assistant_skill]
-    all_models: List[WaldieModel] = []
-    group_chat_members: List[WaldieAgent] = [user, assistant]
+    all_skills: List[HarmonySkill] = [assistant_skill]
+    all_models: List[HarmonyModel] = []
+    group_chat_members: List[HarmonyAgent] = [user, assistant]
     # When
     (
         agent_string,

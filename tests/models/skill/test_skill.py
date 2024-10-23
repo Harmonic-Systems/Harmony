@@ -2,18 +2,18 @@
 
 import pytest
 
-from harmony.models.skill import WaldieSkill
+from harmony.models.skill import HarmonySkill
 
 
-def test_waldie_skill() -> None:
-    """Test WaldieSkill."""
+def test_harmony_skill() -> None:
+    """Test HarmonySkill."""
     # Given
     skill_id = "ws-1"
     name = "skill_name"
     description = "description"
     data = {"content": "def skill_name():\n    pass"}
     # When
-    skill = WaldieSkill(  # type: ignore
+    skill = HarmonySkill(  # type: ignore
         id=skill_id,
         name=name,
         description=description,
@@ -30,9 +30,9 @@ def test_waldie_skill() -> None:
 
 
 def test_invalid_skill() -> None:
-    """Test invalid WaldieSkill."""
+    """Test invalid HarmonySkill."""
     with pytest.raises(ValueError):
-        WaldieSkill()  # type: ignore
+        HarmonySkill()  # type: ignore
 
     # Given
     skill_id = "ws-1"
@@ -41,7 +41,7 @@ def test_invalid_skill() -> None:
     data = {"content": "def skill_name(4):"}
     # Then
     with pytest.raises(ValueError):
-        WaldieSkill(  # type: ignore
+        HarmonySkill(  # type: ignore
             id=skill_id,
             name=name,
             description=description,
@@ -55,7 +55,7 @@ def test_invalid_skill() -> None:
     data = {"content": "def not_skill_name():\n    pass"}
     # Then
     with pytest.raises(ValueError):
-        WaldieSkill(  # type: ignore
+        HarmonySkill(  # type: ignore
             id=skill_id,
             name=name,
             description=description,

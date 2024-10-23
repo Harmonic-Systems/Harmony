@@ -1,13 +1,13 @@
 """Test harmony.models.agents.group_manager.group_manager_data.*."""
 
 from harmony.models.agents.group_manager.group_manager_data import (
-    WaldieGroupManagerData,
+    HarmonyGroupManagerData,
 )
 
 
-def test_waldie_group_manager_data() -> None:
-    """Test WaldieGroupManagerData."""
-    group_manager_data = WaldieGroupManagerData()  # type: ignore
+def test_harmony_group_manager_data() -> None:
+    """Test HarmonyGroupManagerData."""
+    group_manager_data = HarmonyGroupManagerData()  # type: ignore
     assert group_manager_data.human_input_mode == "NEVER"
     # assert defaults
     assert group_manager_data.speakers.selection_method == "auto"

@@ -1,13 +1,13 @@
 """Test harmony.exporting.agents.agent_skills.*."""
 
 from harmony.exporting.agents.agent_skills import get_agent_skill_registrations
-from harmony.models import WaldieAgent, WaldieSkill
+from harmony.models import HarmonyAgent, HarmonySkill
 
 
 def test_get_agent_skill_registrations() -> None:
     """Test get_agent_skill_registrations()."""
     # Given
-    agent = WaldieAgent(  # type: ignore
+    agent = HarmonyAgent(  # type: ignore
         id="wa-1",
         name="agent_name",
         agent_type="assistant",
@@ -20,7 +20,7 @@ def test_get_agent_skill_registrations() -> None:
             ],
         },
     )
-    skill = WaldieSkill(  # type: ignore
+    skill = HarmonySkill(  # type: ignore
         id="ws-1",
         name="skill_name",
         description="Skill description.",

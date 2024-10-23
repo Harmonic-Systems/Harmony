@@ -10,9 +10,9 @@ from pydantic import (
 )
 from typing_extensions import Annotated, Literal
 
-from ..common import WaldieBase
+from ..common import HarmonyBase
 
-WaldieChatSummaryMethod = Literal[
+HarmonyChatSummaryMethod = Literal[
     "reflectionWithLlm",
     "lastMsg",
     "reflection_with_llm",
@@ -20,12 +20,12 @@ WaldieChatSummaryMethod = Literal[
 ]
 
 
-class WaldieChatSummary(WaldieBase):
+class HarmonyChatSummary(HarmonyBase):
     """Llm summary method options.
 
     Attributes
     ----------
-    method : Optional[WaldieChatSummaryMethod]
+    method : Optional[HarmonyChatSummaryMethod]
         The method to use for the LLM summary. Defaults to "last_msg".
     prompt : str
         The prompt for the LLM summary method.
@@ -34,7 +34,7 @@ class WaldieChatSummary(WaldieBase):
     """
 
     method: Annotated[
-        Optional[WaldieChatSummaryMethod],
+        Optional[HarmonyChatSummaryMethod],
         Field(
             "last_msg",
             title="Method",
@@ -61,18 +61,18 @@ class WaldieChatSummary(WaldieBase):
     @field_validator("method", mode="before")
     @classmethod
     def validate_summary_method(
-        cls, value: Optional[WaldieChatSummaryMethod]
-    ) -> Optional[WaldieChatSummaryMethod]:
+        cls, value: Optional[HarmonyChatSummaryMethod]
+    ) -> Optional[HarmonyChatSummaryMethod]:
         """Validate the summary method.
 
         Parameters
         ----------
-        value : Optional[WaldieChatSummaryMethod]
-            The passed WaldieChatSummaryMethod
+        value : Optional[HarmonyChatSummaryMethod]
+            The passed HarmonyChatSummaryMethod
 
         Returns
         -------
-        Optional[WaldieChatSummaryMethod]
+        Optional[HarmonyChatSummaryMethod]
             The validated message summary method
         """
         if str(value).lower() == "none":

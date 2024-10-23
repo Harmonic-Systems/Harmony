@@ -1,20 +1,20 @@
 """Test harmony.exporting.models*."""
 
 from harmony.exporting.models import export_models
-from harmony.models import WaldieModel, WaldieModelData
+from harmony.models import HarmonyModel, HarmonyModelData
 
 
 def test_export_models() -> None:
     """Test export_models()."""
     # Given
-    model1 = WaldieModel(
+    model1 = HarmonyModel(
         id="wm-1",
         name="llama3.1",
         type="model",
         description="A model for llamas :P.",
         tags=["llama3.1 8b"],
         requirements=[],
-        data=WaldieModelData(
+        data=HarmonyModelData(
             base_url="https://example.com/v1",
             api_key="1234567890",
             api_type="openai",
@@ -56,14 +56,14 @@ llama3_1_llm_config = {
     assert result == expected
 
     # Given
-    model2 = WaldieModel(
+    model2 = HarmonyModel(
         id="wm-1",
         name="anthropic_model",
         type="model",
         description="An anthropic model.",
         tags=[],
         requirements=[],
-        data=WaldieModelData(
+        data=HarmonyModelData(
             base_url="https://example.com/v2",
             api_key="1234567890",
             api_type="anthropic",
@@ -104,14 +104,14 @@ anthropic_model_llm_config = {
     assert result == expected_str
 
     # Given
-    model3 = WaldieModel(
+    model3 = HarmonyModel(
         id="wm-2",
         name="groq_model",
         type="model",
         description="A groq model.",
         tags=["groq"],
         requirements=[],
-        data=WaldieModelData(
+        data=HarmonyModelData(
             base_url="https://example.com/v4",
             api_key="1234567890",
             api_type="groq",

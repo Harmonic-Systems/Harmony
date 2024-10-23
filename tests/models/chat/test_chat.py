@@ -1,17 +1,17 @@
 """Test harmony.models.chat.chat.*."""
 
-from harmony.models.agents.rag_user import WaldieRagUser
-from harmony.models.chat.chat import WaldieChat
-from harmony.models.chat.chat_data import WaldieChatData
-from harmony.models.chat.chat_nested import WaldieChatNested
+from harmony.models.agents.rag_user import HarmonyRagUser
+from harmony.models.chat.chat import HarmonyChat
+from harmony.models.chat.chat_data import HarmonyChatData
+from harmony.models.chat.chat_nested import HarmonyChatNested
 
 
-def test_waldie_chat() -> None:
-    """Test WaldieChat."""
+def test_harmony_chat() -> None:
+    """Test HarmonyChat."""
     # Given
-    chat = WaldieChat(
+    chat = HarmonyChat(
         id="wc-1",
-        data=WaldieChatData(  # type: ignore
+        data=HarmonyChatData(  # type: ignore
             name="chat_data",
             description="Chat data",
             source="wa-1",
@@ -38,7 +38,7 @@ def test_waldie_chat() -> None:
     assert chat.target == "wa-2"
     assert chat.message.type == "string"
     assert chat.message.content == "Hello there"
-    assert isinstance(chat.nested_chat, WaldieChatNested)
+    assert isinstance(chat.nested_chat, HarmonyChatNested)
     assert chat.nested_chat.message is None
     assert chat.nested_chat.reply is None
     chat_args = chat.get_chat_args()
@@ -53,9 +53,9 @@ def test_waldie_chat() -> None:
     }
 
     # Given
-    chat = WaldieChat(
+    chat = HarmonyChat(
         id="wc-1",
-        data=WaldieChatData(  # type: ignore
+        data=HarmonyChatData(  # type: ignore
             name="chat_data",
             description="Chat data",
             source="wa-1",
@@ -71,9 +71,9 @@ def test_waldie_chat() -> None:
     assert chat.target == "wa-2"
 
     # Given
-    chat = WaldieChat(
+    chat = HarmonyChat(
         id="wc-1",
-        data=WaldieChatData(  # type: ignore
+        data=HarmonyChatData(  # type: ignore
             name="chat_data",
             description="Chat data",
             source="wa-1",
@@ -91,9 +91,9 @@ def test_waldie_chat() -> None:
     assert chat.data.real_target == "wa-4"
 
 
-def test_waldie_chat_with_rag_user() -> None:
-    """Test WaldieChat with RAG user as a source."""
-    agent = WaldieRagUser(
+def test_harmony_chat_with_rag_user() -> None:
+    """Test HarmonyChat with RAG user as a source."""
+    agent = HarmonyRagUser(
         id="wa-1",
         type="agent",
         agent_type="rag_user",
@@ -110,9 +110,9 @@ def test_waldie_chat_with_rag_user() -> None:
         },
     )
     # Given
-    chat = WaldieChat(
+    chat = HarmonyChat(
         id="wc-1",
-        data=WaldieChatData(  # type: ignore
+        data=HarmonyChatData(  # type: ignore
             name="chat_data",
             description="Chat data",
             source="wa-1",

@@ -2,13 +2,13 @@
 
 # pylint: disable=line-too-long
 from harmony.exporting.utils.method_utils import get_method_string
-from harmony.models import WaldieMethodName
+from harmony.models import HarmonyMethodName
 
 
 def test_get_method_string() -> None:
     """Test get_method_string."""
     # Given
-    method_name: WaldieMethodName = "callable_message"
+    method_name: HarmonyMethodName = "callable_message"
     renamed_method_name = "callable_message_agent1"
     # When
     result = get_method_string(

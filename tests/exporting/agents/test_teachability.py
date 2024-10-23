@@ -1,18 +1,18 @@
 """Test harmony.exporting.agents.teachability.*."""
 
 from harmony.exporting.agents.teachability import get_agent_teachability_string
-from harmony.models import WaldieAgent, WaldieAgentTeachability
+from harmony.models import HarmonyAgent, HarmonyAgentTeachability
 
 
 def test_get_agent_teachability_string() -> None:
     """Test get_agent_teachability_string."""
-    agent = WaldieAgent(
+    agent = HarmonyAgent(
         id="wa-1",
         name="agent",
         type="agent",
         agent_type="assistant",
         data={  # type: ignore
-            "teachability": WaldieAgentTeachability(
+            "teachability": HarmonyAgentTeachability(
                 enabled=True,
                 verbosity=1,
                 reset_db=True,
@@ -33,13 +33,13 @@ def test_get_agent_teachability_string() -> None:
         "agent_teachability.add_to_agent(agent)"
     )
     assert teachability_string == expected
-    agent = WaldieAgent(
+    agent = HarmonyAgent(
         id="wa-1",
         name="agent",
         type="agent",
         agent_type="assistant",
         data={  # type: ignore
-            "teachability": WaldieAgentTeachability(
+            "teachability": HarmonyAgentTeachability(
                 enabled=False,
                 verbosity=0,
                 reset_db=False,

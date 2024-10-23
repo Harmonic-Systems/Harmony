@@ -1,9 +1,9 @@
 """Waldie flow related models."""
 
-from .flow import WaldieFlow
-from .flow_data import WaldieFlowData
+from .flow import HarmonyFlow
+from .flow_data import HarmonyFlowData
 
 __all__ = [
-    "WaldieFlow",
-    "WaldieFlowData",
+    "HarmonyFlow",
+    "HarmonyFlowData",
 ]

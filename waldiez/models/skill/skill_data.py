@@ -5,10 +5,10 @@ from typing import Dict
 from pydantic import Field
 from typing_extensions import Annotated
 
-from ..common import WaldieBase
+from ..common import HarmonyBase
 
 
-class WaldieSkillData(WaldieBase):
+class HarmonySkillData(HarmonyBase):
     """Waldie Skill Data.
 
     Attributes

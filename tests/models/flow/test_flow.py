@@ -3,38 +3,38 @@
 import pytest
 
 from harmony.models import (
-    WaldieAgents,
-    WaldieAgentTeachability,
-    WaldieAgentTerminationMessage,
-    WaldieAssistant,
-    WaldieAssistantData,
-    WaldieChat,
-    WaldieChatData,
-    WaldieChatNested,
-    WaldieChatSummary,
-    WaldieFlow,
-    WaldieFlowData,
-    WaldieGroupManager,
-    WaldieGroupManagerData,
-    WaldieGroupManagerSpeakers,
-    WaldieModel,
-    WaldieModelData,
-    WaldieModelPrice,
-    WaldieRagUser,
-    WaldieRagUserData,
-    WaldieRagUserRetrieveConfig,
-    WaldieRagUserVectorDbConfig,
-    WaldieSkill,
-    WaldieSkillData,
-    WaldieUserProxy,
-    WaldieUserProxyData,
+    HarmonyAgents,
+    HarmonyAgentTeachability,
+    HarmonyAgentTerminationMessage,
+    HarmonyAssistant,
+    HarmonyAssistantData,
+    HarmonyChat,
+    HarmonyChatData,
+    HarmonyChatNested,
+    HarmonyChatSummary,
+    HarmonyFlow,
+    HarmonyFlowData,
+    HarmonyGroupManager,
+    HarmonyGroupManagerData,
+    HarmonyGroupManagerSpeakers,
+    HarmonyModel,
+    HarmonyModelData,
+    HarmonyModelPrice,
+    HarmonyRagUser,
+    HarmonyRagUserData,
+    HarmonyRagUserRetrieveConfig,
+    HarmonyRagUserVectorDbConfig,
+    HarmonySkill,
+    HarmonySkillData,
+    HarmonyUserProxy,
+    HarmonyUserProxyData,
 )
 
 
-def test_waldie_flow() -> None:
-    """Test WaldieFlow."""
+def test_harmony_flow() -> None:
+    """Test HarmonyFlow."""
     # Given
-    user = WaldieUserProxy(
+    user = HarmonyUserProxy(
         id="wa-1",
         name="user",
         type="agent",
@@ -44,21 +44,21 @@ def test_waldie_flow() -> None:
         requirements=["user"],
         created_at="2021-01-01T00:00:00.000Z",
         updated_at="2021-01-01T00:00:00.000Z",
-        data=WaldieUserProxyData(
+        data=HarmonyUserProxyData(
             system_message="User message",
             human_input_mode="ALWAYS",
             max_tokens=100,
             max_consecutive_auto_reply=1,
             code_execution_config=False,
             agent_default_auto_reply="User auto reply",
-            teachability=WaldieAgentTeachability(
+            teachability=HarmonyAgentTeachability(
                 enabled=False,
                 verbosity=0,
                 reset_db=False,
                 recall_threshold=0.0,
                 max_num_retrievals=0,
             ),
-            termination=WaldieAgentTerminationMessage(
+            termination=HarmonyAgentTerminationMessage(
                 type="keyword",
                 criterion="found",
                 keywords=["TERMINATE"],
@@ -69,7 +69,7 @@ def test_waldie_flow() -> None:
             nested_chats=[],
         ),
     )
-    assistant = WaldieAssistant(
+    assistant = HarmonyAssistant(
         id="wa-2",
         name="assistant",
         type="agent",
@@ -79,21 +79,21 @@ def test_waldie_flow() -> None:
         requirements=["assistant"],
         created_at="2021-01-01T00:00:00.000Z",
         updated_at="2021-01-01T00:00:00.000Z",
-        data=WaldieAssistantData(
+        data=HarmonyAssistantData(
             system_message="Assistant message",
             human_input_mode="ALWAYS",
             max_tokens=100,
             max_consecutive_auto_reply=1,
             code_execution_config=False,
             agent_default_auto_reply="Assistant auto reply",
-            teachability=WaldieAgentTeachability(
+            teachability=HarmonyAgentTeachability(
                 enabled=False,
                 verbosity=0,
                 reset_db=False,
                 recall_threshold=0.0,
                 max_num_retrievals=0,
             ),
-            termination=WaldieAgentTerminationMessage(
+            termination=HarmonyAgentTerminationMessage(
                 type="keyword",
                 criterion="found",
                 keywords=["TERMINATE"],
@@ -104,7 +104,7 @@ def test_waldie_flow() -> None:
             nested_chats=[],
         ),
     )
-    manager = WaldieGroupManager(
+    manager = HarmonyGroupManager(
         id="wa-3",
         name="manager",
         type="agent",
@@ -114,21 +114,21 @@ def test_waldie_flow() -> None:
         requirements=["manager"],
         created_at="2021-01-01T00:00:00.000Z",
         updated_at="2021-01-01T00:00:00.000Z",
-        data=WaldieGroupManagerData(
+        data=HarmonyGroupManagerData(
             system_message="Manager message",
             human_input_mode="ALWAYS",
             max_tokens=100,
             max_consecutive_auto_reply=1,
             code_execution_config=False,
             agent_default_auto_reply="Manager auto reply",
-            teachability=WaldieAgentTeachability(
+            teachability=HarmonyAgentTeachability(
                 enabled=False,
                 verbosity=0,
                 reset_db=False,
                 recall_threshold=0.0,
                 max_num_retrievals=0,
             ),
-            termination=WaldieAgentTerminationMessage(
+            termination=HarmonyAgentTerminationMessage(
                 type="keyword",
                 criterion="found",
                 keywords=["TERMINATE"],
@@ -141,7 +141,7 @@ def test_waldie_flow() -> None:
             enable_clear_history=False,
             admin_name="user",
             send_introductions=False,
-            speakers=WaldieGroupManagerSpeakers(
+            speakers=HarmonyGroupManagerSpeakers(
                 selection_method="round_robin",
                 selection_custom_method=None,
                 selection_mode="transition",
@@ -154,7 +154,7 @@ def test_waldie_flow() -> None:
             ),
         ),
     )
-    rag_user = WaldieRagUser(
+    rag_user = HarmonyRagUser(
         id="wa-4",
         name="rag_user",
         type="agent",
@@ -164,21 +164,21 @@ def test_waldie_flow() -> None:
         requirements=["rag_user"],
         created_at="2021-01-01T00:00:00.000Z",
         updated_at="2021-01-01T00:00:00.000Z",
-        data=WaldieRagUserData(
+        data=HarmonyRagUserData(
             system_message="Rag user message",
             human_input_mode="ALWAYS",
             max_tokens=100,
             max_consecutive_auto_reply=1,
             code_execution_config=False,
             agent_default_auto_reply="Rag user auto reply",
-            teachability=WaldieAgentTeachability(
+            teachability=HarmonyAgentTeachability(
                 enabled=False,
                 verbosity=0,
                 reset_db=False,
                 recall_threshold=0.0,
                 max_num_retrievals=0,
             ),
-            termination=WaldieAgentTerminationMessage(
+            termination=HarmonyAgentTerminationMessage(
                 type="keyword",
                 criterion="found",
                 keywords=["TERMINATE"],
@@ -187,10 +187,10 @@ def test_waldie_flow() -> None:
             model_ids=[],
             skills=[],
             nested_chats=[],
-            retrieve_config=WaldieRagUserRetrieveConfig(
+            retrieve_config=HarmonyRagUserRetrieveConfig(
                 task="code",
                 vector_db="chroma",
-                db_config=WaldieRagUserVectorDbConfig(
+                db_config=HarmonyRagUserVectorDbConfig(
                     local_storage_path="",
                     use_local_storage=False,
                     use_memory=False,
@@ -226,16 +226,16 @@ def test_waldie_flow() -> None:
             ),
         ),
     )
-    agents = WaldieAgents(
+    agents = HarmonyAgents(
         users=[user],
         assistants=[assistant],
         managers=[manager],
         rag_users=[rag_user],
     )
     chats = [
-        WaldieChat(
+        HarmonyChat(
             id="wc-1",
-            data=WaldieChatData(
+            data=HarmonyChatData(
                 name="chat_data",
                 description="Chat data",
                 source="wa-1",
@@ -245,8 +245,8 @@ def test_waldie_flow() -> None:
                 clear_history=False,
                 message="Hello there",
                 max_turns=1,
-                nested_chat=WaldieChatNested(message=None, reply=None),
-                summary=WaldieChatSummary(
+                nested_chat=HarmonyChatNested(message=None, reply=None),
+                summary=HarmonyChatSummary(
                     method="last_msg",
                     prompt="",
                     args={},
@@ -256,9 +256,9 @@ def test_waldie_flow() -> None:
                 real_target=None,
             ),
         ),
-        WaldieChat(
+        HarmonyChat(
             id="wc-2",
-            data=WaldieChatData(
+            data=HarmonyChatData(
                 name="chat_data",
                 description="Chat data",
                 source="wa-3",
@@ -268,8 +268,8 @@ def test_waldie_flow() -> None:
                 clear_history=False,
                 message="Hello there",
                 max_turns=2,
-                nested_chat=WaldieChatNested(message=None, reply=None),
-                summary=WaldieChatSummary(
+                nested_chat=HarmonyChatNested(message=None, reply=None),
+                summary=HarmonyChatSummary(
                     method="last_msg",
                     prompt="",
                     args={},
@@ -279,9 +279,9 @@ def test_waldie_flow() -> None:
                 real_target=None,
             ),
         ),
-        WaldieChat(
+        HarmonyChat(
             id="wc-3",
-            data=WaldieChatData(
+            data=HarmonyChatData(
                 name="chat_data",
                 description="Chat data",
                 source="wa-3",
@@ -290,20 +290,20 @@ def test_waldie_flow() -> None:
                 order=-1,
                 clear_history=False,
                 message="Hello there",
-                summary=WaldieChatSummary(
+                summary=HarmonyChatSummary(
                     method="last_msg",
                     prompt="",
                     args={},
                 ),
                 max_turns=3,
-                nested_chat=WaldieChatNested(message=None, reply=None),
+                nested_chat=HarmonyChatNested(message=None, reply=None),
                 silent=False,
                 real_source=None,
                 real_target=None,
             ),
         ),
     ]
-    skill = WaldieSkill(
+    skill = HarmonySkill(
         id="ws-1",
         name="skill_name",
         type="skill",
@@ -312,12 +312,12 @@ def test_waldie_flow() -> None:
         requirements=["skill"],
         created_at="2021-01-01T00:00:00.000Z",
         updated_at="2021-01-01T00:00:00.000Z",
-        data=WaldieSkillData(
+        data=HarmonySkillData(
             content="def skill_name():\n    return 'Skill name'",
             secrets={},
         ),
     )
-    model = WaldieModel(
+    model = HarmonyModel(
         id="wm-1",
         name="model_name",
         type="model",
@@ -326,7 +326,7 @@ def test_waldie_flow() -> None:
         requirements=["model"],
         created_at="2021-01-01T00:00:00.000Z",
         updated_at="2021-01-01T00:00:00.000Z",
-        data=WaldieModelData(
+        data=HarmonyModelData(
             api_key="-",
             api_type="openai",
             api_version="2020-05-03",
@@ -335,13 +335,13 @@ def test_waldie_flow() -> None:
             top_p=None,
             max_tokens=100,
             default_headers={},
-            price=WaldieModelPrice(
+            price=HarmonyModelPrice(
                 prompt_price_per_1k=0.06,
                 completion_token_price_per_1k=0.12,
             ),
         ),
     )
-    flow_data = WaldieFlowData(
+    flow_data = HarmonyFlowData(
         nodes=[],
         edges=[],
         viewport={},
@@ -351,7 +351,7 @@ def test_waldie_flow() -> None:
         chats=chats,
     )
     # When
-    flow1 = WaldieFlow(
+    flow1 = HarmonyFlow(
         id="wf-1",
         name="flow",
         type="flow",
@@ -379,7 +379,7 @@ def test_waldie_flow() -> None:
 
     with pytest.raises(ValueError):
         # no chats
-        WaldieFlow(
+        HarmonyFlow(
             id="wf-2",
             name="flow",
             type="flow",
@@ -389,7 +389,7 @@ def test_waldie_flow() -> None:
             storage_id="flow-1",
             created_at="2021-01-01T00:00:00.000Z",
             updated_at="2021-01-01T00:00:00.000Z",
-            data=WaldieFlowData(
+            data=HarmonyFlowData(
                 nodes=[],
                 edges=[],
                 viewport={},
@@ -401,7 +401,7 @@ def test_waldie_flow() -> None:
         )
     with pytest.raises(ValueError):
         # not unique skill IDs
-        WaldieFlow(
+        HarmonyFlow(
             id="wf-2",
             name="flow",
             type="flow",
@@ -411,7 +411,7 @@ def test_waldie_flow() -> None:
             storage_id="flow-1",
             created_at="2021-01-01T00:00:00.000Z",
             updated_at="2021-01-01T00:00:00.000Z",
-            data=WaldieFlowData(
+            data=HarmonyFlowData(
                 nodes=[],
                 edges=[],
                 viewport={},
@@ -424,7 +424,7 @@ def test_waldie_flow() -> None:
 
     with pytest.raises(ValueError):
         # not unique model IDs
-        WaldieFlow(
+        HarmonyFlow(
             id="wf-3",
             name="flow",
             type="flow",
@@ -434,7 +434,7 @@ def test_waldie_flow() -> None:
             storage_id="flow-1",
             created_at="2021-01-01T00:00:00.000Z",
             updated_at="2021-01-01T00:00:00.000Z",
-            data=WaldieFlowData(
+            data=HarmonyFlowData(
                 nodes=[],
                 edges=[],
                 viewport={},
@@ -444,7 +444,7 @@ def test_waldie_flow() -> None:
                 chats=chats,
             ),
         )
-    assistant2 = WaldieAssistant(
+    assistant2 = HarmonyAssistant(
         id="wa-5",
         name="assistant",
         type="agent",
@@ -454,21 +454,21 @@ def test_waldie_flow() -> None:
         requirements=["assistant"],
         created_at="2021-01-01T00:00:00.000Z",
         updated_at="2021-01-01T00:00:00.000Z",
-        data=WaldieAssistantData(
+        data=HarmonyAssistantData(
             system_message="Assistant message",
             human_input_mode="ALWAYS",
             max_tokens=100,
             max_consecutive_auto_reply=1,
             code_execution_config=False,
             agent_default_auto_reply="Assistant auto reply",
-            teachability=WaldieAgentTeachability(
+            teachability=HarmonyAgentTeachability(
                 enabled=False,
                 verbosity=0,
                 reset_db=False,
                 recall_threshold=0.0,
                 max_num_retrievals=0,
             ),
-            termination=WaldieAgentTerminationMessage(
+            termination=HarmonyAgentTerminationMessage(
                 type="keyword",
                 criterion="found",
                 keywords=["TERMINATE"],
@@ -479,7 +479,7 @@ def test_waldie_flow() -> None:
             nested_chats=[],
         ),
     )
-    agents2 = WaldieAgents(
+    agents2 = HarmonyAgents(
         users=[user],
         assistants=[assistant, assistant2],
         managers=[manager],
@@ -487,7 +487,7 @@ def test_waldie_flow() -> None:
     )
     with pytest.raises(ValueError):
         # agents do not connect to any other node
-        WaldieFlow(
+        HarmonyFlow(
             id="wf-4",
             name="flow",
             type="flow",
@@ -497,7 +497,7 @@ def test_waldie_flow() -> None:
             storage_id="flow-1",
             created_at="2021-01-01T00:00:00.000Z",
             updated_at="2021-01-01T00:00:00.000Z",
-            data=WaldieFlowData(
+            data=HarmonyFlowData(
                 nodes=[],
                 edges=[],
                 viewport={},
@@ -509,16 +509,16 @@ def test_waldie_flow() -> None:
         )
     # set positions < 0
     # and one chat in the flow
-    agents3 = WaldieAgents(
+    agents3 = HarmonyAgents(
         users=[user],
         assistants=[assistant],
         managers=[],
         rag_users=[],
     )
     chats2 = [
-        WaldieChat(
+        HarmonyChat(
             id="wc-1",
-            data=WaldieChatData(
+            data=HarmonyChatData(
                 name="chat_data",
                 description="Chat data",
                 source="wa-1",
@@ -526,21 +526,21 @@ def test_waldie_flow() -> None:
                 position=-1,
                 order=-1,
                 clear_history=False,
-                summary=WaldieChatSummary(
+                summary=HarmonyChatSummary(
                     method="last_msg",
                     prompt="",
                     args={},
                 ),
                 message="Hello there",
                 max_turns=1,
-                nested_chat=WaldieChatNested(message=None, reply=None),
+                nested_chat=HarmonyChatNested(message=None, reply=None),
                 silent=False,
                 real_source=None,
                 real_target=None,
             ),
         ),
     ]
-    flow = WaldieFlow(
+    flow = HarmonyFlow(
         id="wf-5",
         name="flow",
         type="flow",
@@ -550,7 +550,7 @@ def test_waldie_flow() -> None:
         storage_id="flow-1",
         created_at="2021-01-01T00:00:00.000Z",
         updated_at="2021-01-01T00:00:00.000Z",
-        data=WaldieFlowData(
+        data=HarmonyFlowData(
             nodes=[],
             edges=[],
             viewport={},

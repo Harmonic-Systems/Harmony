@@ -1,48 +1,48 @@
-"""Test WaldieExporter."""
+"""Test HarmonyExporter."""
 
 from pathlib import Path
 
 import pytest
 
-from harmony import Waldie, WaldieExporter
-from harmony.models import WaldieFlow
+from harmony import Harmony, HarmonyExporter
+from harmony.models import HarmonyFlow
 
 from .exporting.flow_helpers import get_flow
 
 
-def test_export_load_from_file(waldie_flow: WaldieFlow) -> None:
+def test_export_load_from_file(harmony_flow: HarmonyFlow) -> None:
     """Test exporting and loading from file.
 
     Parameters
     ----------
-    waldie_flow : WaldieFlow
-        A WaldieFlow instance.
+    harmony_flow : HarmonyFlow
+        A HarmonyFlow instance.
     """
-    waldie = Waldie(flow=waldie_flow)
-    exporter = WaldieExporter(waldie)
-    output_file = Path("waldie.harmony")
+    harmony = Harmony(flow=harmony_flow)
+    exporter = HarmonyExporter(harmony)
+    output_file = Path("flow.harmony")
     exporter.export(str(output_file))
     assert output_file.exists()
-    WaldieExporter.load(output_file)
+    HarmonyExporter.load(output_file)
     output_file.unlink()
 
 
 def test_exporter_load_invalid_path() -> None:
     """Test exporter load invalid path."""
     with pytest.raises(ValueError):
-        WaldieExporter.load(Path("non_existent_file"))
+        HarmonyExporter.load(Path("non_existent_file"))
 
 
-def test_exporter_use_directory(waldie_flow: WaldieFlow) -> None:
+def test_exporter_use_directory(harmony_flow: HarmonyFlow) -> None:
     """Test exporter use directory.
 
     Parameters
     ----------
-    waldie_flow : WaldieFlow
-        A WaldieFlow instance.
+    harmony_flow : HarmonyFlow
+        A HarmonyFlow instance.
     """
-    waldie = Waldie(flow=waldie_flow)
-    exporter = WaldieExporter(waldie)
+    harmony = Harmony(flow=harmony_flow)
+    exporter = HarmonyExporter(harmony)
     output_dir = Path("output_dir.harmony")
     output_dir.mkdir()
     with pytest.raises(IsADirectoryError):
@@ -50,17 +50,17 @@ def test_exporter_use_directory(waldie_flow: WaldieFlow) -> None:
     output_dir.rmdir()
 
 
-def test_exporter_file_exists(waldie_flow: WaldieFlow) -> None:
+def test_exporter_file_exists(harmony_flow: HarmonyFlow) -> None:
     """Test exporter file exists.
 
     Parameters
     ----------
-    waldie_flow : WaldieFlow
-        A WaldieFlow instance.
+    harmony_flow : HarmonyFlow
+        A HarmonyFlow instance.
     """
-    waldie = Waldie(flow=waldie_flow)
-    exporter = WaldieExporter(waldie)
-    output_file = Path("waldie.harmony")
+    harmony = Harmony(flow=harmony_flow)
+    exporter = HarmonyExporter(harmony)
+    output_file = Path("flow.harmony")
     output_file.touch()
     with pytest.raises(FileExistsError):
         exporter.export(output_file)
@@ -68,81 +68,81 @@ def test_exporter_file_exists(waldie_flow: WaldieFlow) -> None:
     output_file.unlink()
 
 
-def test_exporter_force(waldie_flow: WaldieFlow) -> None:
+def test_exporter_force(harmony_flow: HarmonyFlow) -> None:
     """Test exporter force.
 
     Parameters
     ----------
-    waldie_flow : WaldieFlow
-        A WaldieFlow instance.
+    harmony_flow : HarmonyFlow
+        A HarmonyFlow instance.
     """
-    waldie = Waldie(flow=waldie_flow)
-    exporter = WaldieExporter(waldie)
-    output_file = Path("waldie.harmony")
+    harmony = Harmony(flow=harmony_flow)
+    exporter = HarmonyExporter(harmony)
+    output_file = Path("flow.harmony")
     output_file.touch()
     exporter.export(output_file, force=True)
     output_file.unlink()
 
 
-def test_export_to_py(waldie_flow: WaldieFlow) -> None:
+def test_export_to_py(harmony_flow: HarmonyFlow) -> None:
     """Test exporting to Python.
 
     Parameters
     ----------
-    waldie_flow : WaldieFlow
-        A WaldieFlow instance.
+    harmony_flow : HarmonyFlow
+        A HarmonyFlow instance.
     """
-    waldie = Waldie(flow=waldie_flow)
-    exporter = WaldieExporter(waldie)
-    output_file = Path("waldie.py")
+    harmony = Harmony(flow=harmony_flow)
+    exporter = HarmonyExporter(harmony)
+    output_file = Path("harmony.py")
     exporter.export(output_file)
     assert output_file.exists()
     output_file.unlink()
 
 
-def test_export_to_ipynb(waldie_flow: WaldieFlow) -> None:
+def test_export_to_ipynb(harmony_flow: HarmonyFlow) -> None:
     """Test exporting to Jupyter Notebook.
 
     Parameters
     ----------
-    waldie_flow : WaldieFlow
-        A WaldieFlow instance.
+    harmony_flow : HarmonyFlow
+        A HarmonyFlow instance.
     """
-    waldie = Waldie(flow=waldie_flow)
-    exporter = WaldieExporter(waldie)
-    output_file = Path("waldie.ipynb")
+    harmony = Harmony(flow=harmony_flow)
+    exporter = HarmonyExporter(harmony)
+    output_file = Path("harmony.ipynb")
     exporter.export(output_file)
     assert output_file.exists()
     output_file.unlink()
 
 
-def test_export_to_harmony(waldie_flow: WaldieFlow) -> None:
+def test_export_to_harmony(harmony_flow: HarmonyFlow) -> None:
     """Test exporting to Harmony file.
 
     Parameters
     ----------
-    waldie_flow : WaldieFlow
-        A WaldieFlow instance.
+    harmony_flow : HarmonyFlow
+        A HarmonyFlow instance.
     """
-    waldie = Waldie(flow=waldie_flow)
-    exporter = WaldieExporter(waldie)
-    output_file = Path("waldie.harmony")
+    harmony = Harmony(flow=harmony_flow)
+    exporter = HarmonyExporter(harmony)
+    output_file = Path("harmony.harmony")
     exporter.export(output_file)
     assert output_file.exists()
     output_file.unlink()
 
 
-def test_export_to_invalid_extension(waldie_flow: WaldieFlow) -> None:
+def test_export_to_invalid_extension(harmony_flow: HarmonyFlow) -> None:
     """Test exporting to invalid extension.
 
     Parameters
     ----------
-    waldie_flow : WaldieFlow
-        A WaldieFlow instance.
+    harmony_flow : HarmonyFlow
+        A HarmonyFlow instance.
     """
-    waldie = Waldie(flow=waldie_flow)
-    exporter = WaldieExporter(waldie)
-    output_file = Path("waldie.invalid")
+    harmony = Harmony(flow=harmony_flow)
+    exporter = HarmonyExporter(harmony)
+    output_file = Path("harmony.invalid")
     with pytest.raises(ValueError):
         exporter.export(output_file)
 
@@ -150,9 +150,9 @@ def test_export_to_invalid_extension(waldie_flow: WaldieFlow) -> None:
 def test_export_complex_flow() -> None:
     """Test exporting invalid flow."""
     flow = get_flow()
-    waldie = Waldie(flow=flow)
-    exporter = WaldieExporter(waldie)
-    output_file = Path("waldie.py")
+    harmony = Harmony(flow=flow)
+    exporter = HarmonyExporter(harmony)
+    output_file = Path("flow.py")
     exporter.export(output_file)
     assert output_file.exists()
     output_file.unlink()

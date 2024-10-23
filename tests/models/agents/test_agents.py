@@ -1,13 +1,17 @@
 """Test harmony.models.agents."""
 
-from harmony.models.agents import WaldieAgents, WaldieAssistant, WaldieUserProxy
-from harmony.models.model import WaldieModel
-from harmony.models.skill import WaldieSkill
+from harmony.models.agents import (
+    HarmonyAgents,
+    HarmonyAssistant,
+    HarmonyUserProxy,
+)
+from harmony.models.model import HarmonyModel
+from harmony.models.skill import HarmonySkill
 
 
-def test_waldie_agents() -> None:
-    """Test WaldieAgents."""
-    model = WaldieModel(
+def test_harmony_agents() -> None:
+    """Test HarmonyAgents."""
+    model = HarmonyModel(
         id="wa-1",
         name="model",
         type="model",
@@ -16,7 +20,7 @@ def test_waldie_agents() -> None:
         requirements=[],
         data={},  # type: ignore
     )
-    skill = WaldieSkill(
+    skill = HarmonySkill(
         id="wa-2",
         name="skill",
         type="skill",
@@ -27,7 +31,7 @@ def test_waldie_agents() -> None:
             "content": "def skill():\n    return 'skill'",
         },
     )
-    assistant = WaldieAssistant(
+    assistant = HarmonyAssistant(
         id="wa-1",
         name="assistant",
         type="agent",
@@ -42,7 +46,7 @@ def test_waldie_agents() -> None:
             ],
         },
     )
-    user = WaldieUserProxy(
+    user = HarmonyUserProxy(
         id="wa-2",
         name="user",
         type="agent",
@@ -52,7 +56,7 @@ def test_waldie_agents() -> None:
         requirements=[],
         data={},  # type: ignore
     )
-    agents = WaldieAgents(
+    agents = HarmonyAgents(
         assistants=[assistant],
         users=[user],
         managers=[],

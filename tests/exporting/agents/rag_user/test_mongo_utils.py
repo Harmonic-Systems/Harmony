@@ -2,17 +2,17 @@
 
 from harmony.exporting.agents.rag_user.mongo_utils import get_mongodb_db_args
 from harmony.models import (
-    WaldieRagUser,
-    WaldieRagUserData,
-    WaldieRagUserRetrieveConfig,
-    WaldieRagUserVectorDbConfig,
+    HarmonyRagUser,
+    HarmonyRagUserData,
+    HarmonyRagUserRetrieveConfig,
+    HarmonyRagUserVectorDbConfig,
 )
 
 
 def test_get_mongodb_db_args() -> None:
     """Test get_mongodb_db_args."""
     # Given
-    rag_user = WaldieRagUser(
+    rag_user = HarmonyRagUser(
         id="wa-1",
         name="rag_user",
         type="agent",
@@ -20,12 +20,12 @@ def test_get_mongodb_db_args() -> None:
         description="description",
         tags=["tag1"],
         requirements=["requirement1", "requirement2"],
-        data=WaldieRagUserData(  # type: ignore
-            retrieve_config=WaldieRagUserRetrieveConfig(  # type: ignore
+        data=HarmonyRagUserData(  # type: ignore
+            retrieve_config=HarmonyRagUserRetrieveConfig(  # type: ignore
                 docs_path="docs_path",
                 collection_name="collection_name",
                 vector_db="mongodb",
-                db_config=WaldieRagUserVectorDbConfig(  # type: ignore
+                db_config=HarmonyRagUserVectorDbConfig(  # type: ignore
                     connection_url="http://localhost:27017",
                     use_local_storage=True,
                     local_storage_path="local_storage_path",
@@ -60,7 +60,7 @@ def test_get_mongodb_db_custom_embeddings() -> None:
         "def custom_embedding_function():\n"
         '    return SentenceTransformer("model").encode\n'
     )
-    rag_user = WaldieRagUser(
+    rag_user = HarmonyRagUser(
         id="wa-1",
         name="rag_user",
         description="rag user description",
@@ -68,12 +68,12 @@ def test_get_mongodb_db_custom_embeddings() -> None:
         type="agent",
         agent_type="rag_user",
         requirements=["requirement2"],
-        data=WaldieRagUserData(  # type: ignore
-            retrieve_config=WaldieRagUserRetrieveConfig(  # type: ignore
+        data=HarmonyRagUserData(  # type: ignore
+            retrieve_config=HarmonyRagUserRetrieveConfig(  # type: ignore
                 docs_path="docs_path",
                 collection_name="collection_name",
                 vector_db="mongodb",
-                db_config=WaldieRagUserVectorDbConfig(  # type: ignore
+                db_config=HarmonyRagUserVectorDbConfig(  # type: ignore
                     connection_url="http://localhost:27017",
                     use_local_storage=True,
                     local_storage_path="local_storage_path",

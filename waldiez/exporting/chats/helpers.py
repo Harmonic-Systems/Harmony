@@ -11,10 +11,10 @@ export_multiple_chats_string
 from typing import Any, Dict, List, Optional, Tuple
 
 from harmony.models import (
-    WaldieAgent,
-    WaldieChat,
-    WaldieChatMessage,
-    WaldieRagUser,
+    HarmonyAgent,
+    HarmonyChat,
+    HarmonyChatMessage,
+    HarmonyRagUser,
 )
 
 from ..utils import get_escaped_string, get_object_string
@@ -22,7 +22,7 @@ from ..utils import get_escaped_string, get_object_string
 
 # pylint: disable=line-too-long
 def export_single_chat_string(
-    flow: Tuple[WaldieChat, WaldieAgent, WaldieAgent],
+    flow: Tuple[HarmonyChat, HarmonyAgent, HarmonyAgent],
     agent_names: Dict[str, str],
     chat_names: Dict[str, str],
     tabs: int,
@@ -31,7 +31,7 @@ def export_single_chat_string(
 
     Parameters
     ----------
-    flow : Tuple[WaldieChat, WaldieAgent, WaldieAgent]
+    flow : Tuple[HarmonyChat, HarmonyAgent, HarmonyAgent]
         The chat flow.
     agent_names : Dict[str, str]
         A mapping of agent id to agent name.
@@ -48,17 +48,17 @@ def export_single_chat_string(
     Example
     -------
     ```python
-    >>> from harmony.models import WaldieAgent, WaldieChat, WaldieChatData, WaldieChatMessage
-    >>> chat = WaldieChat(
+    >>> from harmony.models import HarmonyAgent, HarmonyChat, HarmonyChatData, HarmonyChatMessage
+    >>> chat = HarmonyChat(
     ...     id="wc-1",
     ...     name="chat1",
     ...     description="A chat between two agents.",
     ...     tags=["chat", "chat1"],
     ...     requirements=[],
-    ...     data=WaldieChatData(
+    ...     data=HarmonyChatData(
     ...         sender="wa-1",
     ...         recipient="wa-2",
-    ...         message=WaldieChatMessage(
+    ...         message=HarmonyChatMessage(
     ...             type="string",
     ...             content="Hello, how are you?",
     ...         ),
@@ -96,7 +96,7 @@ def export_single_chat_string(
 
 
 def export_multiple_chats_string(
-    main_chats: List[Tuple[WaldieChat, WaldieAgent, WaldieAgent]],
+    main_chats: List[Tuple[HarmonyChat, HarmonyAgent, HarmonyAgent]],
     chat_names: Dict[str, str],
     agent_names: Dict[str, str],
     tabs: int,
@@ -105,7 +105,7 @@ def export_multiple_chats_string(
 
     Parameters
     ----------
-    main_chats : List[Tuple[WaldieChat, WaldieAgent, WaldieAgent]]
+    main_chats : List[Tuple[HarmonyChat, HarmonyAgent, HarmonyAgent]]
         The main chats.
     chat_names : Dict[str, str]
         A mapping of chat id to chat name.
@@ -122,34 +122,34 @@ def export_multiple_chats_string(
     Example
     -------
     ```python
-    >>> from harmony.models import WaldieAgent, WaldieChat, WaldieChatData, WaldieChatMessage
-    >>> chat1 = WaldieChat(
+    >>> from harmony.models import HarmonyAgent, HarmonyChat, HarmonyChatData, HarmonyChatMessage
+    >>> chat1 = HarmonyChat(
     ...     id="wc-1",
     ...     name="chat1",
     ...     description="A chat between two agents.",
     ...     tags=["chat", "chat1"],
     ...     requirements=[],
-    ...     data=WaldieChatData(
+    ...     data=HarmonyChatData(
     ...         sender="wa-1",
     ...         recipient="wa-2",
     ...         position=0,
-    ...         message=WaldieChatMessage(
+    ...         message=HarmonyChatMessage(
     ...             type="string",
     ...             content="Hello, how are you?",
     ...         ),
     ...     ),
     ... )
-    >>> chat2 = WaldieChat(
+    >>> chat2 = HarmonyChat(
     ...     id="wc-2",
     ...     name="chat2",
     ...     description="A chat between two agents.",
     ...     tags=["chat", "chat2"],
     ...     requirements=[],
-    ...     data=WaldieChatData(
+    ...     data=HarmonyChatData(
     ...         sender="wa-2",
     ...         recipient="wa-1",
     ...         position=1,
-    ...         message=WaldieChatMessage(
+    ...         message=HarmonyChatMessage(
     ...             type="string",
     ...             content="I am good, thank you. How about you?",
     ...         ),
@@ -192,14 +192,14 @@ def export_multiple_chats_string(
 
 
 def _get_chat_message_string(
-    chat: WaldieChat,
+    chat: HarmonyChat,
     chat_names: Dict[str, str],
 ) -> Tuple[str, Optional[str]]:
     """Get the agent's message as a string.
 
     Parameters
     ----------
-    chat : WaldieChat
+    chat : HarmonyChat
         The chat.
     chat_names : Dict[str, str]
         A mapping of chat id to chat name with all the chats in the flow.
@@ -229,9 +229,9 @@ def _get_chat_message_string(
 
 
 def _get_chat_dict_string(
-    chat: WaldieChat,
-    sender: WaldieAgent,
-    recipient: WaldieAgent,
+    chat: HarmonyChat,
+    sender: HarmonyAgent,
+    recipient: HarmonyAgent,
     chat_names: Dict[str, str],
     agent_names: Dict[str, str],
     tabs: int,
@@ -244,11 +244,11 @@ def _get_chat_dict_string(
 
     Parameters
     ----------
-    chat : WaldieChat
+    chat : HarmonyChat
         The chat.
-    sender : WaldieAgent
+    sender : HarmonyAgent
         The sender.
-    recipient : WaldieAgent
+    recipient : HarmonyAgent
         The recipient.
     chat_names : Dict[str, str]
         A mapping of chat id to chat name.
@@ -280,7 +280,7 @@ def _get_chat_dict_string(
             chat_string += "\n" + f'{tab}    "{key}": {value},'
     if (
         sender.agent_type == "rag_user"
-        and isinstance(sender, WaldieRagUser)
+        and isinstance(sender, HarmonyRagUser)
         and chat.message.type == "rag_message_generator"
     ):
         message = f"{agent_names[sender.id]}.message_generator"
@@ -291,7 +291,7 @@ def _get_chat_dict_string(
         chat=chat,
         chat_names=chat_names,
     )
-    if message and isinstance(chat.data.message, WaldieChatMessage):
+    if message and isinstance(chat.data.message, HarmonyChatMessage):
         message = get_escaped_string(message)
         if chat.data.message.type == "method":
             if method_content:
@@ -305,9 +305,9 @@ def _get_chat_dict_string(
 
 def _get_empty_simple_chat_string(
     tab: str,
-    chat: WaldieChat,
-    sender: WaldieAgent,
-    recipient: WaldieAgent,
+    chat: HarmonyChat,
+    sender: HarmonyAgent,
+    recipient: HarmonyAgent,
     agent_names: Dict[str, str],
 ) -> Tuple[str, str]:
     content = tab
@@ -329,16 +329,16 @@ def _get_empty_simple_chat_string(
 
 def _get_chat_message(
     tab: str,
-    chat: WaldieChat,
+    chat: HarmonyChat,
     chat_names: Dict[str, str],
-    sender: WaldieAgent,
+    sender: HarmonyAgent,
     sender_name: str,
 ) -> Tuple[str, str]:
     additional_methods_string = ""
     method_content: Optional[str] = None
     if (
         sender.agent_type == "rag_user"
-        and isinstance(sender, WaldieRagUser)
+        and isinstance(sender, HarmonyRagUser)
         and chat.message.type == "rag_message_generator"
     ):
         message = f"{sender_name}.message_generator"
@@ -347,7 +347,7 @@ def _get_chat_message(
         chat=chat,
         chat_names=chat_names,
     )
-    if message and isinstance(chat.data.message, WaldieChatMessage):
+    if message and isinstance(chat.data.message, HarmonyChatMessage):
         message = get_escaped_string(message)
         if chat.data.message.type == "method":
             additional_methods_string += (
@@ -361,9 +361,9 @@ def _get_chat_message(
 
 
 def _get_simple_chat_string(
-    chat: WaldieChat,
-    sender: WaldieAgent,
-    recipient: WaldieAgent,
+    chat: HarmonyChat,
+    sender: HarmonyAgent,
+    recipient: HarmonyAgent,
     agent_names: Dict[str, str],
     chat_names: Dict[str, str],
     chat_args: Dict[str, Any],

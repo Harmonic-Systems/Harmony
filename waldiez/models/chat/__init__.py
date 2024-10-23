@@ -1,22 +1,22 @@
 """Waldie chat related models."""
 
-from .chat import WaldieChat
-from .chat_data import WaldieChatData
+from .chat import HarmonyChat
+from .chat_data import HarmonyChatData
 from .chat_message import (
-    WaldieChatMessage,
-    WaldieChatMessageType,
+    HarmonyChatMessage,
+    HarmonyChatMessageType,
     validate_message_dict,
 )
-from .chat_nested import WaldieChatNested
-from .chat_summary import WaldieChatSummary, WaldieChatSummaryMethod
+from .chat_nested import HarmonyChatNested
+from .chat_summary import HarmonyChatSummary, HarmonyChatSummaryMethod
 
 __all__ = [
-    "WaldieChat",
-    "WaldieChatData",
-    "WaldieChatMessage",
-    "WaldieChatMessageType",
-    "WaldieChatNested",
-    "WaldieChatSummary",
-    "WaldieChatSummaryMethod",
+    "HarmonyChat",
+    "HarmonyChatData",
+    "HarmonyChatMessage",
+    "HarmonyChatMessageType",
+    "HarmonyChatNested",
+    "HarmonyChatSummary",
+    "HarmonyChatSummaryMethod",
     "validate_message_dict",
 ]

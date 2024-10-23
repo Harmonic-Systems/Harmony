@@ -3,22 +3,22 @@
 from pydantic import Field
 from typing_extensions import Annotated, Literal
 
-from ..agent import WaldieAgent
-from .user_proxy_data import WaldieUserProxyData
+from ..agent import HarmonyAgent
+from .user_proxy_data import HarmonyUserProxyData
 
 
-class WaldieUserProxy(WaldieAgent):
+class HarmonyUserProxy(HarmonyAgent):
     """User proxy agent model.
 
-    A `WaldieAgent` with agent_type `user` and
+    A `HarmonyAgent` with agent_type `user` and
     default `human_input_mode`: `"ALWAYS"`
-    See `WaldieAgent`, `WaldieUserProxyData`, `WaldieAgentData` for more info.
+    See `HarmonyAgent`,`HarmonyUserProxyData`,`HarmonyAgentData` for more info.
 
     Attributes
     ----------
     agent_type : Literal["user"]
         The agent type: 'user' for a user proxy agent
-    data : WaldieUserProxyData
+    data : HarmonyUserProxyData
         The user proxy agent's data
     """
 
@@ -32,10 +32,10 @@ class WaldieUserProxy(WaldieAgent):
         ),
     ]
     data: Annotated[
-        WaldieUserProxyData,
+        HarmonyUserProxyData,
         Field(
             title="Data",
             description="The user proxy agent's data",
-            default_factory=WaldieUserProxyData,
+            default_factory=HarmonyUserProxyData,
         ),
     ]

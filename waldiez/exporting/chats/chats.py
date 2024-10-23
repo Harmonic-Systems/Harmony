@@ -2,13 +2,13 @@
 
 from typing import Dict, List, Tuple
 
-from harmony.models import WaldieAgent, WaldieChat
+from harmony.models import HarmonyAgent, HarmonyChat
 
 from .helpers import export_multiple_chats_string, export_single_chat_string
 
 
 def export_chats(
-    main_chats: List[Tuple[WaldieChat, WaldieAgent, WaldieAgent]],
+    main_chats: List[Tuple[HarmonyChat, HarmonyAgent, HarmonyAgent]],
     agent_names: Dict[str, str],
     chat_names: Dict[str, str],
     tabs: int,
@@ -17,7 +17,7 @@ def export_chats(
 
     Parameters
     ----------
-    main_chats : List[Tuple[WaldieChat, WaldieAgent, WaldieAgent]]
+    main_chats : List[Tuple[HarmonyChat, HarmonyAgent, HarmonyAgent]]
         The main flow chats.
     agent_names : Dict[str, str]
         A mapping of agent id to agent name.

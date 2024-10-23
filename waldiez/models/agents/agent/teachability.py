@@ -3,10 +3,10 @@
 from pydantic import Field
 from typing_extensions import Annotated, Literal
 
-from ...common import WaldieBase
+from ...common import HarmonyBase
 
 
-class WaldieAgentTeachability(WaldieBase):
+class HarmonyAgentTeachability(HarmonyBase):
     """Waldie Agent Teachability.
 
     Attributes

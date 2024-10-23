@@ -5,9 +5,9 @@ from typing import Dict, Optional
 from pydantic import Field
 from typing_extensions import Annotated, Literal
 
-from ..common import WaldieBase
+from ..common import HarmonyBase
 
-WaldieModelAPIType = Literal[
+HarmonyModelAPIType = Literal[
     "openai",
     "azure",
     "google",
@@ -20,7 +20,7 @@ WaldieModelAPIType = Literal[
 ]
 
 
-class WaldieModelPrice(WaldieBase):
+class HarmonyModelPrice(HarmonyBase):
     """Model Price.
 
     Attributes
@@ -40,7 +40,7 @@ class WaldieModelPrice(WaldieBase):
 
 
 # pylint: disable=line-too-long
-class WaldieModelData(WaldieBase):
+class HarmonyModelData(HarmonyBase):
     """Waldie Model Data.
 
     Attributes
@@ -61,7 +61,7 @@ class WaldieModelData(WaldieBase):
         The max tokens of the model, by default None.
     default_headers : Dict[str, str]
         The default headers of the model.
-    price : Optional[WaldieModelPrice]
+    price : Optional[HarmonyModelPrice]
         The price of the model, by default None.
     """
 
@@ -75,7 +75,7 @@ class WaldieModelData(WaldieBase):
         ),
     ]
     api_key: Annotated[Optional[str], Field(None, alias="apiKey")]
-    api_type: Annotated[WaldieModelAPIType, Field("other", alias="apiType")]
+    api_type: Annotated[HarmonyModelAPIType, Field("other", alias="apiType")]
     api_version: Annotated[Optional[str], Field(None, alias="apiVersion")]
     temperature: Annotated[Optional[float], Field(None, alias="temperature")]
     top_p: Annotated[Optional[float], Field(None, alias="topP")]
@@ -83,4 +83,4 @@ class WaldieModelData(WaldieBase):
     default_headers: Annotated[
         Dict[str, str], Field(alias="defaultHeaders", default_factory=dict)
     ]
-    price: Annotated[Optional[WaldieModelPrice], Field(None)]
+    price: Annotated[Optional[HarmonyModelPrice], Field(None)]

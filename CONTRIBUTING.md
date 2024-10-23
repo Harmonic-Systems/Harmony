@@ -27,7 +27,7 @@ There are three core modules in this project:
 
 - `harmony.models`: Contains the pydantic models for the harmony flow.
 - `harmony.exporting`: Contains the logic to export a harmony flow to a python script or a jupyter notebook.
-- `harmony.stream`: Contains the logic to provide the WaldieIOStream (extends autogen.IOSream) to handle input and output.
+- `harmony.stream`: Contains the logic to provide the HarmonyIOStream (extends autogen.IOSream) to handle input and output.
 
 For each of the modules, there is a corresponding test module in the `tests` folder.
 
@@ -73,7 +73,7 @@ harmony
 │   ├── provider.py
 │   └── server.py
 ├── _version.py
-└── waldie.py
+└── harmony.py
 ```
 
 ## Testing

@@ -2,23 +2,23 @@
 
 from typing import Dict, List, Optional, Tuple
 
-from harmony.models import WaldieAgent, WaldieGroupManager
+from harmony.models import HarmonyAgent, HarmonyGroupManager
 
 from ..utils import get_method_string, get_object_string
 
 
 def get_group_manager_extras(
-    agent: WaldieAgent,
-    group_chat_members: List[WaldieAgent],
+    agent: HarmonyAgent,
+    group_chat_members: List[HarmonyAgent],
     agent_names: Dict[str, str],
 ) -> Tuple[str, str]:
     """Get the group manager extra string and custom selection method if any.
 
     Parameters
     ----------
-    agent : WaldieAgent
+    agent : HarmonyAgent
         The agent.
-    group_chat_members : List[WaldieAgent]
+    group_chat_members : List[HarmonyAgent]
         The group members.
     agent_names : Dict[str, str]
         The agent names.
@@ -32,7 +32,7 @@ def get_group_manager_extras(
     group_chat_arg = ""
     before_agent_string = ""
     custom_speaker_selection: Optional[str] = None
-    if agent.agent_type == "manager" and isinstance(agent, WaldieGroupManager):
+    if agent.agent_type == "manager" and isinstance(agent, HarmonyGroupManager):
         group_chat_string, group_chat_name, custom_speaker_selection = (
             _get_group_manager_extras(agent, group_chat_members, agent_names)
         )
@@ -46,17 +46,17 @@ def get_group_manager_extras(
 
 
 def _get_group_manager_extras(
-    agent: WaldieGroupManager,
-    group_members: List[WaldieAgent],
+    agent: HarmonyGroupManager,
+    group_members: List[HarmonyAgent],
     agent_names: Dict[str, str],
 ) -> Tuple[str, str, Optional[str]]:
     """Get the group manager extra string and custom selection method if any.
 
     Parameters
     ----------
-    agent : WaldieGroupManager
+    agent : HarmonyGroupManager
         The agent.
-    group_members : List[WaldieAgent]
+    group_members : List[HarmonyAgent]
         The group members.
     agent_names : Dict[str, str]
         The agent names.
@@ -105,13 +105,13 @@ def _get_group_manager_extras(
 
 
 def _get_group_chat_speakers_string(
-    agent: WaldieGroupManager, agent_names: Dict[str, str]
+    agent: HarmonyGroupManager, agent_names: Dict[str, str]
 ) -> Tuple[str, Optional[Tuple[str, str]]]:
     """Get the group chat speakers string.
 
     Parameters
     ----------
-    agent : WaldieGroupManager
+    agent : HarmonyGroupManager
         The agent.
     agent_names : Dict[str, str]
         The agent names.
@@ -163,7 +163,7 @@ def _get_group_chat_speakers_string(
 
 
 def _get_speakers_selection_repeat_string(
-    agent: WaldieGroupManager, agent_names: Dict[str, str]
+    agent: HarmonyGroupManager, agent_names: Dict[str, str]
 ) -> str:
     speakers_string = ""
     if isinstance(agent.data.speakers.allow_repeat, bool):
@@ -183,7 +183,7 @@ def _get_speakers_selection_repeat_string(
 
 
 def _get_speakers_selection_transition_string(
-    agent: WaldieGroupManager, agent_names: Dict[str, str]
+    agent: HarmonyGroupManager, agent_names: Dict[str, str]
 ) -> str:
     speakers_string = ""
     allowed_or_disallowed_speaker_transitions = {}

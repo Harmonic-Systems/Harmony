@@ -5,7 +5,7 @@ build/
 dist/
 site/
 reports/
-waldie_out/
+harmony_out/
 **/logs/
 **/tmp/
 **/documents/

@@ -2,18 +2,18 @@
 
 from typing import Dict
 
-from harmony.models import WaldieAgent
+from harmony.models import HarmonyAgent
 
 
 def get_agent_teachability_string(
-    agent: WaldieAgent,
+    agent: HarmonyAgent,
     agent_names: Dict[str, str],
 ) -> str:
     """Get the teachability string to use for the agent.
 
     Parameters
     ----------
-    agent : WaldieAgent
+    agent : HarmonyAgent
         The agent.
     agent_names : Dict[str, str]
         A mapping of agent id to agent name.

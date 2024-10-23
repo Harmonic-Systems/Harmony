@@ -130,7 +130,7 @@ nav:
           - Server: stream/server.md
           - Consumer: stream/consumer.md
           - Provider: stream/provider.md
-      - Waldie: waldie.md
-      - WaldieRunner: runner.md
-      - WaldieExporter: exporter.md
-      - WaldieIOSstream: io_stream.md
+      - Harmony: harmony.md
+      - HarmonyRunner: runner.md
+      - HarmonyExporter: exporter.md
+      - HarmonyIOSstream: io_stream.md

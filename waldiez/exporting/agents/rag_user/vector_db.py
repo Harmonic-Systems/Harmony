@@ -3,7 +3,7 @@
 # pylint: disable=line-too-long
 from typing import Any, Set, Tuple
 
-from harmony.models import WaldieRagUser
+from harmony.models import HarmonyRagUser
 
 from .chroma_utils import get_chroma_db_args
 from .mongo_utils import get_mongodb_db_args
@@ -12,13 +12,13 @@ from .qdrant_utils import get_qdrant_db_args
 
 
 def _get_metadata_arg(
-    agent: WaldieRagUser,
+    agent: HarmonyRagUser,
 ) -> str:
     """Get the metadata arg.
 
     Parameters
     ----------
-    agent : WaldieRagUser
+    agent : HarmonyRagUser
         The agent.
 
     Returns
@@ -43,7 +43,7 @@ def _get_metadata_arg(
 
 
 def get_rag_user_vector_db_string(
-    agent: WaldieRagUser,
+    agent: HarmonyRagUser,
     agent_name: str,
 ) -> Tuple[str, str, Set[str]]:
     """Get the RAG user vector db string.
@@ -59,7 +59,7 @@ def get_rag_user_vector_db_string(
 
     Parameters
     ----------
-    agent : WaldieRagUser
+    agent : HarmonyRagUser
         The agent.
     agent_name : str
         The agent's name.

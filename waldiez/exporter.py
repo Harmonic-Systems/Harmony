@@ -1,4 +1,4 @@
-"""Waldie exporter.
+"""Harmony exporter.
 
 The role of the exporter is to export the model's data
 to an autogen's flow with one or more chats.
@@ -22,38 +22,43 @@ from pathlib import Path
 from typing import Dict, List, Optional, Union
 
 from .exporting import comment, export_flow, get_valid_instance_name
-from .models import WaldieAgent, WaldieChat, WaldieModel, WaldieSkill
-from .waldie import Waldie
+from .models import (
+    Harmony,
+    HarmonyAgent,
+    HarmonyChat,
+    HarmonyModel,
+    HarmonySkill,
+)
 
 
-class WaldieExporter:
-    """Waldie exporter.
+class HarmonyExporter:
+    """Harmony exporter.
 
     Attributes:
-        waldie (Waldie): The Waldie instance.
+        harmony (Harmony): The Harmony instance.
     """
 
     _agent_names: Dict[str, str]
     _model_names: Dict[str, str]
     _skill_names: Dict[str, str]
     _chat_names: Dict[str, str]
-    _chats: List[WaldieChat]
-    _skills: List[WaldieSkill]
-    _models: List[WaldieModel]
-    _agents: List[WaldieAgent]
+    _chats: List[HarmonyChat]
+    _skills: List[HarmonySkill]
+    _models: List[HarmonyModel]
+    _agents: List[HarmonyAgent]
 
-    def __init__(self, waldie: Waldie) -> None:
-        """Initialize the Waldie exporter.
+    def __init__(self, harmony: Harmony) -> None:
+        """Initialize the Harmony exporter.
 
         Parameters:
-            waldie (Waldie): The Waldie instance.
+            harmony (Harmony): The Harmony instance.
         """
-        self.waldie = waldie
+        self.harmony = harmony
         self._initialize()
 
     @classmethod
-    def load(cls, file_path: Path) -> "WaldieExporter":
-        """Load the Waldie instance from a file.
+    def load(cls, file_path: Path) -> "HarmonyExporter":
+        """Load the Harmony instance from a file.
 
         Parameters
         ----------
@@ -62,11 +67,11 @@ class WaldieExporter:
 
         Returns
         -------
-        WaldieExporter
-            The Waldie exporter.
+        HarmonyExporter
+            The Harmony exporter.
         """
-        waldie = Waldie.load(file_path)
-        return cls(waldie)
+        harmony = Harmony.load(file_path)
+        return cls(harmony)
 
     def _initialize(
         self,
@@ -81,29 +86,29 @@ class WaldieExporter:
         model_names: Dict[str, str] = {}
         skill_names: Dict[str, str] = {}
         chat_names: Dict[str, str] = {}
-        chats: List[WaldieChat] = []
-        skills: List[WaldieSkill] = []
-        models: List[WaldieModel] = []
-        agents: List[WaldieAgent] = []
-        for agent in self.waldie.agents:
+        chats: List[HarmonyChat] = []
+        skills: List[HarmonySkill] = []
+        models: List[HarmonyModel] = []
+        agents: List[HarmonyAgent] = []
+        for agent in self.harmony.agents:
             all_names = get_valid_instance_name(
                 (agent.id, agent.name), all_names, prefix="wa"
             )
             agent_names[agent.id] = all_names[agent.id]
             agents.append(agent)
-        for model in self.waldie.models:
+        for model in self.harmony.models:
             all_names = get_valid_instance_name(
                 (model.id, model.name), all_names, prefix="wm"
             )
             model_names[model.id] = all_names[model.id]
             models.append(model)
-        for skill in self.waldie.skills:
+        for skill in self.harmony.skills:
             all_names = get_valid_instance_name(
                 (skill.id, skill.name), all_names, prefix="ws"
             )
             skill_names[skill.id] = all_names[skill.id]
             skills.append(skill)
-        for chat in self.waldie.flow.data.chats:
+        for chat in self.harmony.flow.data.chats:
             all_names = get_valid_instance_name(
                 (chat.id, chat.name), all_names, prefix="wc"
             )
@@ -119,7 +124,7 @@ class WaldieExporter:
         self._agents = agents
 
     def export(self, path: Union[str, Path], force: bool = False) -> None:
-        """Export the Waldie instance.
+        """Export the Harmony instance.
 
         Parameters
         ----------
@@ -170,16 +175,16 @@ class WaldieExporter:
         RuntimeError
             If the notebook could not be generated.
         """
-        content = f"{comment(True)}{self.waldie.name}" + "\n\n"
+        content = f"{comment(True)}{self.harmony.name}" + "\n\n"
         content += f"{comment(True, 2)}Dependencies" + "\n\n"
         content += "import sys\n"
-        requirements = " ".join(self.waldie.requirements)
+        requirements = " ".join(self.harmony.requirements)
         if requirements:
             content += (
                 f"# !{{sys.executable}} -m pip install -q {requirements}" + "\n"
             )
         content += export_flow(
-            waldie=self.waldie,
+            harmony=self.harmony,
             agents=(self._agents, self._agent_names),
             chats=(self._chats, self._chat_names),
             models=(self._models, self._model_names),
@@ -208,7 +213,7 @@ class WaldieExporter:
         py_path.unlink()
 
     def to_py(self, path: Path) -> None:
-        """Export waldie flow to python script.
+        """Export harmony flow to python script.
 
         Parameters
         ----------
@@ -216,15 +221,15 @@ class WaldieExporter:
             The path to export to.
         """
         content = "#!/usr/bin/env python\n"
-        content += f'"""{self.waldie.name}\n\n'
-        content += f"{self.waldie.description}\n\n"
-        content += f"Tags: {', '.join(self.waldie.tags)}\n\n"
-        content += f"Requirements: {', '.join(self.waldie.requirements)}\n\n"
+        content += f'"""{self.harmony.name}\n\n'
+        content += f"{self.harmony.description}\n\n"
+        content += f"Tags: {', '.join(self.harmony.tags)}\n\n"
+        content += f"Requirements: {', '.join(self.harmony.requirements)}\n\n"
         content += '"""\n\n'
         content += "# cspell: disable\n"
         content += "# flake8: noqa\n\n"
         content += export_flow(
-            waldie=self.waldie,
+            harmony=self.harmony,
             agents=(self._agents, self._agent_names),
             chats=(self._chats, self._chat_names),
             models=(self._models, self._model_names),
@@ -246,7 +251,7 @@ class WaldieExporter:
             The file path.
         """
         with open(file_path, "w", encoding="utf-8") as file:
-            file.write(self.waldie.model_dump_json())
+            file.write(self.harmony.model_dump_json())
 
 
 def run_command(

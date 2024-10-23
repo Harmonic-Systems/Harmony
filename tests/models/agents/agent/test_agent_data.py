@@ -1,29 +1,29 @@
 """Test harmony.models.agents.agent.agent_data.*."""
 
-from harmony.models.agents.agent.agent_data import WaldieAgentData
-from harmony.models.agents.agent.teachability import WaldieAgentTeachability
+from harmony.models.agents.agent.agent_data import HarmonyAgentData
+from harmony.models.agents.agent.teachability import HarmonyAgentTeachability
 from harmony.models.agents.agent.termination_message import (
-    WaldieAgentTerminationMessage,
+    HarmonyAgentTerminationMessage,
 )
 
 
-def test_waldie_agent_data() -> None:
-    """Test WaldieAgentData."""
-    agent_data = WaldieAgentData(
+def test_harmony_agent_data() -> None:
+    """Test HarmonyAgentData."""
+    agent_data = HarmonyAgentData(
         system_message="system_message",
         human_input_mode="NEVER",
         max_tokens=100,
         code_execution_config=False,
         agent_default_auto_reply="auto_reply",
         max_consecutive_auto_reply=5,
-        teachability=WaldieAgentTeachability(
+        teachability=HarmonyAgentTeachability(
             enabled=False,
             verbosity=0,
             reset_db=False,
             recall_threshold=0.0,
             max_num_retrievals=0,
         ),
-        termination=WaldieAgentTerminationMessage(
+        termination=HarmonyAgentTerminationMessage(
             type="none",
             keywords=[],
             criterion=None,
