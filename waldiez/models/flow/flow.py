@@ -1,4 +1,4 @@
-"""Waldie flow model."""
+"""Harmony flow model."""
 
 import uuid
 from typing import List, Optional, Tuple

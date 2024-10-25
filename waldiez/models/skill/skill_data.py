@@ -1,4 +1,4 @@
-"""Waldie Skill model."""
+"""Harmony Skill model."""
 
 from typing import Dict
 
@@ -9,7 +9,7 @@ from ..common import HarmonyBase
 
 
 class HarmonySkillData(HarmonyBase):
-    """Waldie Skill Data.
+    """Harmony Skill Data.
 
     Attributes
     ----------

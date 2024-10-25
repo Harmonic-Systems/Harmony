@@ -1,4 +1,4 @@
-"""Waldie model(llm) model."""
+"""Harmony model(llm) model."""
 
 import os
 from typing import Any, Dict, List, Optional
@@ -11,7 +11,7 @@ from .model_data import HarmonyModelData
 
 
 class HarmonyModel(HarmonyBase):
-    """Waldie Model class.
+    """Harmony Model class.
 
     Attributes
     ----------

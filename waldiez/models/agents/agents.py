@@ -1,4 +1,4 @@
-"""Waldie agents model."""
+"""Harmony agents model."""
 
 from typing import Iterator, List
 
@@ -14,7 +14,7 @@ from .user_proxy import HarmonyUserProxy
 
 
 class HarmonyAgents(HarmonyBase):
-    """Waldie agents model.
+    """Harmony agents model.
 
     Attributes
     ----------
