@@ -1,4 +1,4 @@
-"""Waldie flow related models."""
+"""Harmony flow related models."""
 
 from .flow import HarmonyFlow
 from .flow_data import HarmonyFlowData

@@ -24,7 +24,7 @@ def test_export_load_from_file(harmony_flow: HarmonyFlow) -> None:
     exporter.export(str(output_file))
     assert output_file.exists()
     HarmonyExporter.load(output_file)
-    output_file.unlink()
+    output_file.unlink(missing_ok=True)
 
 
 def test_exporter_load_invalid_path() -> None:
@@ -65,7 +65,7 @@ def test_exporter_file_exists(harmony_flow: HarmonyFlow) -> None:
     with pytest.raises(FileExistsError):
         exporter.export(output_file)
     exporter.export(output_file, force=True)
-    output_file.unlink()
+    output_file.unlink(missing_ok=True)
 
 
 def test_exporter_force(harmony_flow: HarmonyFlow) -> None:
@@ -81,7 +81,7 @@ def test_exporter_force(harmony_flow: HarmonyFlow) -> None:
     output_file = Path("flow.harmony")
     output_file.touch()
     exporter.export(output_file, force=True)
-    output_file.unlink()
+    output_file.unlink(missing_ok=True)
 
 
 def test_export_to_py(harmony_flow: HarmonyFlow) -> None:
@@ -97,7 +97,7 @@ def test_export_to_py(harmony_flow: HarmonyFlow) -> None:
     output_file = Path("harmony.py")
     exporter.export(output_file)
     assert output_file.exists()
-    output_file.unlink()
+    output_file.unlink(missing_ok=True)
 
 
 def test_export_to_ipynb(harmony_flow: HarmonyFlow) -> None:
@@ -113,7 +113,7 @@ def test_export_to_ipynb(harmony_flow: HarmonyFlow) -> None:
     output_file = Path("harmony.ipynb")
     exporter.export(output_file)
     assert output_file.exists()
-    output_file.unlink()
+    output_file.unlink(missing_ok=True)
 
 
 def test_export_to_harmony(harmony_flow: HarmonyFlow) -> None:
@@ -129,7 +129,7 @@ def test_export_to_harmony(harmony_flow: HarmonyFlow) -> None:
     output_file = Path("harmony.harmony")
     exporter.export(output_file)
     assert output_file.exists()
-    output_file.unlink()
+    output_file.unlink(missing_ok=True)
 
 
 def test_export_to_invalid_extension(harmony_flow: HarmonyFlow) -> None:
@@ -158,4 +158,4 @@ def test_export_complex_flow() -> None:
     output_file.unlink()
     skill_file = Path("skill_name.py")
     assert skill_file.exists()
-    skill_file.unlink()
+    skill_file.unlink(missing_ok=True)

@@ -1,4 +1,4 @@
-"""Waldie Model Data."""
+"""Harmony Model Data."""
 
 from typing import Dict, Optional
 
@@ -41,7 +41,7 @@ class HarmonyModelPrice(HarmonyBase):
 
 # pylint: disable=line-too-long
 class HarmonyModelData(HarmonyBase):
-    """Waldie Model Data.
+    """Harmony Model Data.
 
     Attributes
     ----------

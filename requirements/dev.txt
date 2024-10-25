@@ -2,7 +2,7 @@
 #    uv pip compile pyproject.toml --output-file requirements/dev.txt --extra=dev --no-deps --no-strip-extras
 autoflake==2.3.1
     # via harmony (pyproject.toml)
-autogen-agentchat==0.2.36
+autogen-agentchat==0.2.37
     # via harmony (pyproject.toml)
 bandit==1.7.10
     # via harmony (pyproject.toml)
@@ -14,7 +14,7 @@ isort==5.13.2
     # via harmony (pyproject.toml)
 jupytext==1.16.4
     # via harmony (pyproject.toml)
-mypy==1.12.1
+mypy==1.13.0
     # via harmony (pyproject.toml)
 pre-commit==4.0.1
     # via harmony (pyproject.toml)
@@ -24,7 +24,7 @@ pylint==3.3.1
     # via harmony (pyproject.toml)
 python-dotenv==1.0.1
     # via harmony (pyproject.toml)
-ruff==0.7.0
+ruff==0.7.1
     # via harmony (pyproject.toml)
 twisted==24.7.0
     # via harmony (pyproject.toml)

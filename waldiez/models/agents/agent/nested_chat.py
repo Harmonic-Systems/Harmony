@@ -1,4 +1,4 @@
-"""Waldie Agent Nested Chat."""
+"""Harmony Agent Nested Chat."""
 
 from typing import List
 
@@ -9,7 +9,7 @@ from ...common import HarmonyBase
 
 
 class HarmonyAgentNestedChatMessage(HarmonyBase):
-    """Waldie Agent nested chat message.
+    """Harmony Agent nested chat message.
 
     A reference to a chat's message or reply in a nested chat
 
@@ -36,7 +36,7 @@ class HarmonyAgentNestedChatMessage(HarmonyBase):
 
 
 class HarmonyAgentNestedChat(HarmonyBase):
-    """Waldie Agent Nested Chat.
+    """Harmony Agent Nested Chat.
 
     Attributes
     ----------

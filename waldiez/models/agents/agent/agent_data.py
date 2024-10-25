@@ -15,7 +15,7 @@ from .termination_message import HarmonyAgentTerminationMessage
 
 
 class HarmonyAgentData(HarmonyBase):
-    """Waldie Agent Data.
+    """Harmony Agent Data.
 
     Attributes
     ----------

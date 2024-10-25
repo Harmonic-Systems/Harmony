@@ -1,4 +1,4 @@
-"""Waldie Agent Termination Message Check."""
+"""Harmony Agent Termination Message Check."""
 
 from typing import List, Optional
 
@@ -10,7 +10,7 @@ from ...common import HarmonyBase, HarmonyMethodName, check_function
 
 
 class HarmonyAgentTerminationMessage(HarmonyBase):
-    """Waldie Agent Termination Message Check.
+    """Harmony Agent Termination Message Check.
 
     Attributes
     ----------

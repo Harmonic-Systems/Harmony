@@ -1,1 +1,1 @@
-"""Waldie tests."""
+"""Harmony tests."""

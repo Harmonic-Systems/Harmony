@@ -1,4 +1,4 @@
-"""Waldie Message Model."""
+"""Harmony Message Model."""
 
 from typing import Any, Dict, Optional, Tuple, Union
 
@@ -14,7 +14,7 @@ HarmonyChatMessageType = Literal[
 
 class HarmonyChatMessage(HarmonyBase):
     """
-    Waldie Message.
+    Harmony Message.
 
     A generic message with a type and content.
 

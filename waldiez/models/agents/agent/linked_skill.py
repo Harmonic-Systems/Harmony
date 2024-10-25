@@ -1,4 +1,4 @@
-"""Waldie Agent Skill Model."""
+"""Harmony Agent Skill Model."""
 
 from pydantic import Field
 from typing_extensions import Annotated
@@ -7,7 +7,7 @@ from ...common import HarmonyBase
 
 
 class HarmonyAgentLinkedSkill(HarmonyBase):
-    """Waldie Agent Linked Skill.
+    """Harmony Agent Linked Skill.
 
     Attributes
     ----------

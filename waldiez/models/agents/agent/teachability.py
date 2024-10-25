@@ -1,4 +1,4 @@
-"""Waldie Agent Teachability."""
+"""Harmony Agent Teachability."""
 
 from pydantic import Field
 from typing_extensions import Annotated, Literal
@@ -7,7 +7,7 @@ from ...common import HarmonyBase
 
 
 class HarmonyAgentTeachability(HarmonyBase):
-    """Waldie Agent Teachability.
+    """Harmony Agent Teachability.
 
     Attributes
     ----------

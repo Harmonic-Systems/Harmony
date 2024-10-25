@@ -13,7 +13,7 @@ HarmonyAgentType = Literal["user", "assistant", "manager", "rag_user"]
 
 
 class HarmonyAgent(HarmonyBase):
-    """Waldie Agent.
+    """Harmony Agent.
 
     Attributes
     ----------

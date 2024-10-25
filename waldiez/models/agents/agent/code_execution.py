@@ -1,4 +1,4 @@
-"""Waldie Agent Code Execution Configuration."""
+"""Harmony Agent Code Execution Configuration."""
 
 from typing import List, Optional
 
@@ -9,7 +9,7 @@ from ...common import HarmonyBase
 
 
 class HarmonyAgentCodeExecutionConfig(HarmonyBase):
-    """Waldie Agent Code Execution Configuration.
+    """Harmony Agent Code Execution Configuration.
 
     Attributes
     ----------
