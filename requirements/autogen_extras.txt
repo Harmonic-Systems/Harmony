@@ -16,5 +16,5 @@ pymongo==4.10.1
     # via harmony (pyproject.toml)
 qdrant-client==1.12.0
     # via harmony (pyproject.toml)
-twisted==24.7.0
+twisted==24.10.0
     # via harmony (pyproject.toml)
