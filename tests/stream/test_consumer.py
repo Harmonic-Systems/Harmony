@@ -1,11 +1,11 @@
-"""Test harmony.io_stream.consumer.*."""
+"""Test harmony.io.stream.consumer.*."""
 
 import socket
 import unittest
 from typing import Any
 from unittest.mock import Mock, patch
 
-from harmony.stream.consumer import END_OF_MESSAGE, TCPConsumer
+from harmony.io.stream.consumer import END_OF_MESSAGE, TCPConsumer
 
 
 class MockSocket(Mock):

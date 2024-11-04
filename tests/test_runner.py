@@ -6,7 +6,8 @@ from typing import Optional
 
 import pytest
 
-from harmony import Harmony, HarmonyIOStream, HarmonyRunner
+from harmony import Harmony, HarmonyRunner
+from harmony.io import HarmonyIOStream
 from harmony.models import HarmonyFlow
 
 

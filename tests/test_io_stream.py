@@ -1,6 +1,6 @@
 """Test harmony.io_stream.*."""
 
-from harmony.io_stream import HarmonyIOStream
+from harmony.io import HarmonyIOStream
 
 
 def test_harmony_io_stream() -> None:

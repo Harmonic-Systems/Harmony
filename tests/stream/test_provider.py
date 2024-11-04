@@ -1,4 +1,4 @@
-"""Test harmony.io_stream.provider.*."""
+"""Test harmony.io.stream.provider.*."""
 
 import socket
 import time
@@ -8,7 +8,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from harmony.stream.provider import END_OF_MESSAGE, TCPProvider
+from harmony.io.stream.provider import END_OF_MESSAGE, TCPProvider
 
 
 class MockSocket(Mock):

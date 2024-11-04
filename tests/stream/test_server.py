@@ -1,12 +1,12 @@
 # type: ignore
-"""Test harmony.io_stream.server.*."""
+"""Test harmony.io.stream.server.*."""
 
 import socket
 
 import pytest
 from twisted.trial import unittest
 
-from harmony.stream import TCPConsumer, TCPProvider, TCPServer
+from harmony.io.stream import TCPConsumer, TCPProvider, TCPServer
 
 # DeprecationWarning: reactor.stop cannot be used inside unit tests
 
