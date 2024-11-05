@@ -1,1 +1,1 @@
-::: harmony.stream.provider
+::: harmony.io.stream.provider

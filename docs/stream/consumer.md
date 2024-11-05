@@ -1,1 +1,1 @@
-::: harmony.stream.consumer
+::: harmony.io.stream.consumer
