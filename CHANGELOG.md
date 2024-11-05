@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.1.7
+
+- Move `HarmonyIOStream` to `harmony.io` module
+- Move autogen imports to local imports
+- Also Provide a container (docker/podman) image for running/exporting Harmony flows
+
 ## v0.1.6
 
 - Fix SyntaxError with quoted strings
