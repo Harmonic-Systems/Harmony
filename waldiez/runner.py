@@ -19,13 +19,24 @@ from contextlib import contextmanager
 from contextvars import ContextVar
 from pathlib import Path
 from types import TracebackType
-from typing import Callable, Dict, Iterator, List, Optional, Type, Union
-
-from autogen import ChatResult  # type: ignore
+from typing import (
+    TYPE_CHECKING,
+    Callable,
+    Dict,
+    Iterator,
+    List,
+    Optional,
+    Type,
+    Union,
+)
 
 from .exporter import HarmonyExporter
-from .io_stream import HarmonyIOStream
 from .models.harmony import Harmony
+
+if TYPE_CHECKING:
+    from autogen import ChatResult  # type: ignore
+
+    from .io import HarmonyIOStream
 
 
 @contextmanager
@@ -60,7 +71,7 @@ class HarmonyRunner:
         self._harmony = harmony
         self._running = False
         self._file_path = file_path
-        self._stream: ContextVar[Optional[HarmonyIOStream]] = ContextVar(
+        self._stream: ContextVar[Optional["HarmonyIOStream"]] = ContextVar(
             "harmony_stream", default=None
         )
         self._exporter = HarmonyExporter(harmony)
@@ -225,9 +236,9 @@ class HarmonyRunner:
 
     def _do_run(
         self, output_path: Optional[Union[str, Path]]
-    ) -> Union[ChatResult, List[ChatResult]]:
+    ) -> Union["ChatResult", List["ChatResult"]]:
         """Run the Harmony workflow."""
-        results: Union[ChatResult, List[ChatResult]] = []
+        results: Union["ChatResult", List["ChatResult"]] = []
         temp_dir = Path(tempfile.mkdtemp())
         file_name = "flow.py" if not output_path else Path(output_path).name
         if file_name.endswith((".json", ".harmony")):
@@ -259,19 +270,22 @@ class HarmonyRunner:
     def _run(
         self,
         output_path: Optional[Union[str, Path]],
-    ) -> Union[ChatResult, List[ChatResult]]:
+    ) -> Union["ChatResult", List["ChatResult"]]:
         self._install_requirements()
         token = self._stream.get()
         if token is not None:
+            # pylint: disable=import-outside-toplevel
+            from .io import HarmonyIOStream
+
             with HarmonyIOStream.set_default(token):
                 return self._do_run(output_path)
         return self._do_run(output_path)
 
     def run(
         self,
-        stream: Optional[HarmonyIOStream] = None,
+        stream: Optional["HarmonyIOStream"] = None,
         output_path: Optional[Union[str, Path]] = None,
-    ) -> Union[ChatResult, List[ChatResult]]:
+    ) -> Union["ChatResult", List["ChatResult"]]:
         """Run the Harmony workflow.
 
         Parameters

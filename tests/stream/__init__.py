@@ -1,1 +1,1 @@
-"""Test harmony.io_stream.*."""
+"""Test harmony.io.stream.*."""

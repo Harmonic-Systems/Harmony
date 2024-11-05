@@ -170,3 +170,21 @@ def harmony_flow() -> HarmonyFlow:
         A HarmonyFlow instance.
     """
     return get_runnable_flow()
+
+
+@pytest.fixture(scope="function")
+def harmony_flow_no_human_input() -> HarmonyFlow:
+    """Get a valid, runnable HarmonyFlow instance with no human input.
+
+    without models and skills
+
+    Returns
+    -------
+    HarmonyFlow
+        A HarmonyFlow instance.
+    """
+    flow = get_runnable_flow()
+    dumped = flow.model_dump(by_alias=True)
+    dumped["data"]["agents"]["users"][0]["data"]["humanInputMode"] = "NEVER"
+    dumped["data"]["chats"][0]["data"]["maxTurns"] = 1
+    return HarmonyFlow(**dumped)
