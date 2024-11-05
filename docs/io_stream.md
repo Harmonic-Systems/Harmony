@@ -1,1 +1,1 @@
-::: harmony.io_stream
+::: harmony.io.HarmonyIOStream
