@@ -1,1 +1,0 @@
-"""Test harmony.io.stream.*."""
