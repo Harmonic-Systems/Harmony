@@ -27,9 +27,7 @@ There are three core modules in this project:
 
 - `harmony.models`: Contains the pydantic models for the harmony flow.
 - `harmony.exporting`: Contains the logic to export a harmony flow to a python script or a jupyter notebook.
-- `harmony.stream`: Contains the logic to provide the HarmonyIOStream (extends autogen.IOSream) to handle input and output.
-
-For each of the modules, there is a corresponding test module in the `tests` folder.
+- `harmony.io`: Contains the logic to provide the HarmonyIOStream (extends autogen.IOSream) to handle input and output.
 
 The project is structured as follows:
 
@@ -38,7 +36,6 @@ harmony
 ├── __main__.py
 ├── cli.py
 ├── exporter.py
-├── io_stream.py
 ├── runner.py
 ├── exporting
 │   ├── agents
@@ -66,14 +63,9 @@ harmony
 │   │   ...
 │   └── skill
 │       ...
-├── stream
-│   ├── consumer.py
-│   ├── example.py
+├── io
 │   ├── __init__.py
-│   ├── provider.py
-│   └── server.py
 ├── _version.py
-└── harmony.py
 ```
 
 ## Testing
@@ -86,5 +78,4 @@ make test
 # for specific tests
 make test_models
 make test_exporting
-make test_stream
 ```
