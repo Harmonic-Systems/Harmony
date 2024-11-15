@@ -1,6 +1,7 @@
 # Harmony
 
-[![Flow](./flow.png)](./flow.png)
+<img fetchpriority="high" alt="Harmony flow" src="static/images/overview.webp#only-light" />
+<img fetchpriority="high" alt="Harmony flow" src="static/images/overview_dark.webp#only-dark" />
 
 To a python script or a jupyter notebook with the corresponding [ag2](https://github.com/ag2ai/ag2/) agents and chats.
 
@@ -9,7 +10,7 @@ To a python script or a jupyter notebook with the corresponding [ag2](https://gi
 - Export .harmony flows to .py or .ipynb
 - Run a .harmony flow
 - Include a `logs` folder with the logs of the flow in csv format
-- Provide a custom [IOSStream](https://autogen-ai.github.io/autogen/docs/reference/io/base#iostream) to handle input and output.
+- Provide a custom [IOSStream](https://ag2ai.github.io/ag2/docs/reference/io/base#iostream) to handle input and output.
 
 ## Installation
 
