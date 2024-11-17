@@ -40,22 +40,18 @@ class HarmonyAgentNestedChat(HarmonyBase):
 
     Attributes
     ----------
-    triggered_by : List[HarmonyAgentNestedChatMessage]
-        A list of chats (id and is_reply) to determine
-        the triggering of the nested chat.
+    triggered_by : List[str]
+        A list of agent ids that trigger the nested chat.
     messages : List[HarmonyAgentNestedChatMessage]
         The list of messages (chat ids and 'is_reply'z)
         to include the in the nested chat registration.
     """
 
     triggered_by: Annotated[
-        List[HarmonyAgentNestedChatMessage],
+        List[str],
         Field(
             title="Triggered By",
-            description=(
-                "A list of chats (id and is_reply) to determine"
-                "the triggering of the nested chat."
-            ),
+            description=("A list of agent ids that trigger the nested chat."),
             alias="triggeredBy",
             default_factory=list,
         ),

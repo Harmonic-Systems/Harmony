@@ -19,10 +19,9 @@ def test_harmony_agent_nested_chat_message() -> None:
 def test_harmony_agent_nested_chat() -> None:
     """Test HarmonyAgentNestedChat."""
     nested_chat = HarmonyAgentNestedChat(
-        triggered_by=[HarmonyAgentNestedChatMessage(id="wc-1", is_reply=False)],
+        triggered_by=["wa-1"],
         messages=[HarmonyAgentNestedChatMessage(id="wc-2", is_reply=True)],
     )
-    assert nested_chat.triggered_by[0].id == "wc-1"
-    assert not nested_chat.triggered_by[0].is_reply
+    assert nested_chat.triggered_by[0] == "wa-1"
     assert nested_chat.messages[0].id == "wc-2"
     assert nested_chat.messages[0].is_reply
