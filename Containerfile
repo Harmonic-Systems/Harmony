@@ -26,8 +26,8 @@ RUN python -m build
 FROM python:3.12-slim
 
 LABEL maintainer="harmony <development@harmony.io>"
-LABEL org.opencontainers.image.source="quay.io/harmony/py"
-LABEL org.opencontainers.image.title="harmony/py"
+LABEL org.opencontainers.image.source="quay.io/harmony/harmony"
+LABEL org.opencontainers.image.title="harmony/harmony"
 LABEL org.opencontainers.image.description="Python 3.12-slim image with harmony"
 
 COPY --from=builder /app/dist/*.whl /tmp/

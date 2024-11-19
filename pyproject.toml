@@ -26,8 +26,8 @@ dependencies = [
 ]
 
 [project.urls]
-homepage = 'https://harmony.github.io/py/'
-repository = 'https://github.com/harmony/py.git'
+homepage = 'https://harmony.github.io/harmony/'
+repository = 'https://github.com/harmony/harmony.git'
 
 [tool.hatch.build.targets.sdist]
 packages = ["harmony", "harmony.*"]

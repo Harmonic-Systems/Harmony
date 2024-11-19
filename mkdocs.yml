@@ -1,9 +1,9 @@
 ---
 site_name: "Harmony"
 site_description: "Harmony."
-site_url: https://harmony.github.io/py/
-repo_name: harmony/py
-repo_url: https://github.com/harmony/py.git
+site_url: https://harmony.github.io/harmony/
+repo_name: harmony/harmony
+repo_url: https://github.com/harmony/harmony.git
 edit_uri_template: 'blob/main/docs/{path}'
 copyright: "Copyright &copy; 2024 Harmony"
 theme:
