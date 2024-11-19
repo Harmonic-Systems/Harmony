@@ -5,8 +5,8 @@
 This project is a Python package managed with [uv](https://github.com/astral-sh/uv) and [hatch](https://github.com/pypa/hatch). To get started, clone the repository and install the dependencies:
 
 ```bash
-git clone ssh://github.com/harmony/py.git
-cd py
+git clone ssh://github.com/harmony/harmony.git
+cd harmony
 # install uv if not already installed
 python -m pip install uv
 # generate a new venv

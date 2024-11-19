@@ -160,12 +160,7 @@ def get_user_proxy(agent_id: str = "wa-1") -> HarmonyUserProxy:
             ],
             nested_chats=[
                 HarmonyAgentNestedChat(
-                    triggered_by=[
-                        HarmonyAgentNestedChatMessage(
-                            id="wc-1",
-                            is_reply=False,
-                        ),
-                    ],
+                    triggered_by=["wa-1"],
                     messages=[
                         HarmonyAgentNestedChatMessage(
                             id="wc-2",
