@@ -40,6 +40,8 @@ class HarmonyAgentData(HarmonyBase):
         A list of skills (id and executor) to register.
     nested_chats : List[HarmonyAgentNestedChat]
         A list of nested chats (triggered_by, messages), to register.
+    is_multimodal: bool
+        A flag to indicate if the agent is multimodal.
     """
 
     model_config = ConfigDict(
@@ -149,3 +151,12 @@ class HarmonyAgentData(HarmonyBase):
             alias="nestedChats",
         ),
     ]
+    is_multimodal: Annotated[
+        bool,
+        Field(
+            False,
+            title="Is multimodal",
+            description="A flag to indicate if the agent is multimodal.",
+            alias="isMultimodal",
+        ),
+    ] = False
