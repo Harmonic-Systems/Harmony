@@ -1,5 +1,6 @@
 """Test the CLI."""
 
+import re
 import sys
 from pathlib import Path
 
@@ -9,6 +10,23 @@ from harmony import __version__
 from harmony.__main__ import app as harmony_main  # type: ignore
 from harmony.cli import app
 from harmony.models import HarmonyFlow
+
+
+def escape_ansi(text: str) -> str:
+    """Remove ANSI escape sequences from a string.
+
+    Parameters
+    ----------
+    text : str
+        The text to process.
+
+    Returns
+    -------
+    str
+        The text without ANSI escape sequences.
+    """
+    ansi_escape = re.compile(r"\x1B\[[0-?]*[ -/]*[@-~]")
+    return ansi_escape.sub("", text)
 
 
 def test_get_version(capsys: pytest.CaptureFixture[str]) -> None:
@@ -38,7 +56,7 @@ def test_help(capsys: pytest.CaptureFixture[str]) -> None:
         sys.argv = ["harmony", "--help"]
         harmony_main()
     captured = capsys.readouterr()
-    assert "Usage: harmony" in captured.out
+    assert "Usage: harmony" in escape_ansi(captured.out)
 
 
 def test_empty_cli(capsys: pytest.CaptureFixture[str]) -> None:
@@ -53,7 +71,7 @@ def test_empty_cli(capsys: pytest.CaptureFixture[str]) -> None:
         sys.argv = ["harmony"]
         harmony_main()
     captured = capsys.readouterr()
-    assert "Usage: harmony" in captured.out
+    assert "Usage: harmony" in escape_ansi(captured.out)
 
 
 def test_cli_export(
@@ -86,7 +104,8 @@ def test_cli_export(
     ]
     with pytest.raises(SystemExit):
         harmony_main()
-    assert "Generated" in capsys.readouterr().out
+    captured = capsys.readouterr()
+    assert "Generated" in escape_ansi(captured.out)
     assert output_file.exists()
     output_file.unlink(missing_ok=True)
 
@@ -138,4 +157,5 @@ def test_cli_check(
     sys.argv = ["harmony", "check", "--file", str(input_file)]
     with pytest.raises(SystemExit):
         harmony_main()
-    assert "Harmony flow is valid" in capsys.readouterr().out
+    captured = capsys.readouterr()
+    assert "Harmony flow is valid" in escape_ansi(captured.out)
