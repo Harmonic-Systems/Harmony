@@ -98,7 +98,7 @@ docs = [
 ]
 
 [project.scripts]
-harmony = 'harmony.cli:main'
+harmony = 'harmony.cli:app'
 
 [build-system]
 requires = ["hatchling"]
