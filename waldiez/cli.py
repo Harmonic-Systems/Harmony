@@ -1,12 +1,15 @@
 """Command line interface to convert or run a harmony file."""
 
-import argparse
+# pylint: disable=missing-function-docstring,missing-param-doc,missing-raises-doc
 import json
 import logging
 import os
 import sys
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Dict, Optional
+from typing import TYPE_CHECKING, Optional
+
+import typer
+from typing_extensions import Annotated
 
 from . import Harmony, __version__
 from .exporter import HarmonyExporter
@@ -16,121 +19,169 @@ if TYPE_CHECKING:
     from autogen import ChatResult  # type: ignore[import-untyped]
 
 
-def get_parser() -> argparse.ArgumentParser:
-    """Get the argument parser for the Harmony package.
+app = typer.Typer(
+    name="harmony",
+    help="Handle Harmony flows.",
+    context_settings={
+        "help_option_names": ["-h", "--help"],
+        "allow_extra_args": True,
+    },
+    add_completion=False,
+    no_args_is_help=True,
+    invoke_without_command=True,
+    add_help_option=True,
+    pretty_exceptions_enable=False,
+    epilog=("Use `harmony [COMMAND] --help` for command-specific help. "),
+)
 
-    Returns
-    -------
-    argparse.ArgumentParser
-        The argument parser.
-    """
-    parser = argparse.ArgumentParser(
-        description="Run or export a Harmony flow.",
-        prog="harmony",
-    )
-    parser.add_argument(
-        "file",
-        type=str,
-        help="Path to the Harmony flow (*.harmony) file.",
-    )
-    parser.add_argument(
-        "-e",
-        "--export",
-        action="store_true",
-        help=(
-            "Export the Harmony flow to a Python script or a jupyter notebook."
+
+@app.callback()
+def show_version(
+    version: bool = typer.Option(
+        False,
+        "--version",
+        "-v",
+        help="Show the version of the Harmony package.",
+    ),
+) -> None:
+    """Show the version of the Harmony package and exit."""
+    if version:
+        typer.echo(f"harmony version: {__version__}")
+        raise typer.Exit()
+
+
+@app.command()
+def run(
+    file: Annotated[
+        Path,
+        typer.Option(
+            ...,
+            help="Path to the Harmony flow (*.harmony) file.",
+            exists=True,
+            file_okay=True,
+            dir_okay=False,
+            readable=True,
+            resolve_path=True,
         ),
-    )
-    parser.add_argument(
-        "-o",
-        "--output",
-        type=str,
+    ],
+    output: Optional[Path] = typer.Option(
+        None,
         help=(
-            "Path to the output file. "
-            "If exporting, the file extension determines the output format. "
-            "If running, the output's directory will contain "
+            "Path to the output (.py) file. "
+            "The output's directory will contain "
             "the generated flow (.py) and any additional generated files."
         ),
-    )
-    parser.add_argument(
-        "-f",
-        "--force",
-        action="store_true",
-        help=("Override the output file if it already exists. "),
-    )
-    parser.add_argument(
-        "-v",
-        "--version",
-        action="version",
-        version=f"harmony version: {__version__}",
-    )
-    return parser
-
-
-def _log_result(result: "ChatResult") -> None:
-    """Log the result of the Harmony flow."""
-    logger = logging.getLogger("harmony::cli")
-    logger.info("Chat History:\n")
-    logger.info(result.chat_history)
-    logger.info("Summary:\n")
-    logger.info(result.summary)
-    logger.info("Cost:\n")
-    logger.info(result.cost)
-
-
-def _run(data: Dict[str, Any], output_path: Optional[str]) -> None:
-    """Run the Harmony flow."""
+        dir_okay=False,
+        resolve_path=True,
+    ),
+    force: bool = typer.Option(
+        False,
+        help="Override the output file if it already exists.",
+    ),
+) -> None:
+    """Run a Harmony flow."""
+    output_path = _get_output_path(output, force)
+    with file.open("r", encoding="utf-8") as _file:
+        try:
+            data = json.load(_file)
+        except json.decoder.JSONDecodeError as error:
+            typer.echo("Invalid .harmony file. Not a valid json?")
+            raise typer.Exit(code=1) from error
     harmony = Harmony.from_dict(data)
     runner = HarmonyRunner(harmony)
     results = runner.run(stream=None, output_path=output_path)
+    logger = _get_logger()
     if isinstance(results, list):
+        logger.info("Results:")
         for result in results:
-            _log_result(result)
+            _log_result(result, logger)
             sep = "-" * 80
             print(f"\n{sep}\n")
     else:
-        _log_result(results)
+        _log_result(results, logger)
 
 
-def main() -> None:
-    """Parse the command line arguments and run the Harmony flow."""
-    parser = get_parser()
-    if len(sys.argv) == 1:
-        parser.print_help()
-        sys.exit(0)
-    args = parser.parse_args()
-    logger = _get_logger()
-    harmony_file: str = args.file
-    if not os.path.exists(harmony_file):
-        logger.error("File not found: %s", harmony_file)
-        sys.exit(1)
-    if not harmony_file.endswith((".json", ".harmony")):
-        logger.error("Only .json or .harmony files are supported.")
-        sys.exit(1)
-    with open(harmony_file, "r", encoding="utf-8") as file:
+@app.command()
+def convert(
+    file: Annotated[
+        Path,
+        typer.Option(
+            ...,
+            help="Path to the Harmony flow (*.harmony) file.",
+            exists=True,
+            file_okay=True,
+            dir_okay=False,
+            readable=True,
+            resolve_path=True,
+        ),
+    ],
+    output: Annotated[
+        Path,
+        typer.Option(
+            ...,
+            help=(
+                "Path to the output file. "
+                "The file extension determines the output format: "
+                "`.py` for Python script, `.ipynb` for Jupyter notebook."
+            ),
+            file_okay=True,
+            dir_okay=False,
+            resolve_path=True,
+        ),
+    ],
+    force: bool = typer.Option(
+        False,
+        help="Override the output file if it already exists.",
+    ),
+) -> None:
+    """Convert a Harmony flow to a Python script or a Jupyter notebook."""
+    _get_output_path(output, force)
+    with file.open("r", encoding="utf-8") as _file:
         try:
-            data = json.load(file)
-        except json.decoder.JSONDecodeError:
-            logger.error("Invalid .harmony file: %s. Not a valid json?", file)
-            return
-    if args.export is True:
-        if args.output is None:
-            logger.error("Please provide an output file.")
-            sys.exit(1)
-        if not args.output.endswith((".py", ".ipynb", ".json", ".harmony")):
-            logger.error(
-                "Only Python scripts, Jupyter notebooks "
-                "and JSON/Harmony files are supported."
-            )
-            sys.exit(1)
-        output_file = Path(args.output).resolve()
-        harmony = Harmony.from_dict(data)
-        exporter = HarmonyExporter(harmony)
-        exporter.export(output_file, force=args.force)
-        generated = str(output_file).replace(os.getcwd(), ".")
-        logger.info("Generated: %s", generated)
-    else:
-        _run(data, args.output)
+            data = json.load(_file)
+        except json.decoder.JSONDecodeError as error:
+            typer.echo("Invalid .harmony file. Not a valid json?")
+            raise typer.Exit(code=1) from error
+    harmony = Harmony.from_dict(data)
+    exporter = HarmonyExporter(harmony)
+    exporter.export(output, force=force)
+    generated = str(output).replace(os.getcwd(), ".")
+    typer.echo(f"Generated: {generated}")
+
+
+@app.command()
+def check(
+    file: Annotated[
+        Path,
+        typer.Option(
+            ...,
+            help="Path to the Harmony flow (*.harmony) file.",
+            exists=True,
+            file_okay=True,
+            dir_okay=False,
+            readable=True,
+            resolve_path=True,
+        ),
+    ],
+) -> None:
+    """Validate a Harmony flow."""
+    with file.open("r", encoding="utf-8") as _file:
+        data = json.load(_file)
+    Harmony.from_dict(data)
+    typer.echo("Harmony flow is valid.")
+
+
+def _get_output_path(output: Optional[Path], force: bool) -> Optional[Path]:
+    if output is not None:
+        output = Path(output).resolve()
+    if output is not None and not output.parent.exists():
+        output.parent.mkdir(parents=True)
+    if output is not None and output.exists():
+        if force is False:
+            typer.echo("Output file already exists.")
+            raise typer.Exit(code=1)
+        output.unlink()
+    return output
 
 
 def _get_logger(level: int = logging.INFO) -> logging.Logger:
@@ -162,5 +213,16 @@ def _get_logger(level: int = logging.INFO) -> logging.Logger:
     return logger
 
 
+def _log_result(result: "ChatResult", logger: logging.Logger) -> None:
+    """Log the result of the Harmony flow."""
+    logger.info("Chat History:\n")
+    logger.info(result.chat_history)
+    logger.info("Summary:\n")
+    logger.info(result.summary)
+    logger.info("Cost:\n")
+    logger.info(result.cost)
+
+
 if __name__ == "__main__":
-    main()
+    _get_logger()
+    app()

@@ -7,9 +7,8 @@ To a python script or a jupyter notebook with the corresponding [ag2](https://gi
 
 ## Features
 
-- Export .harmony flows to .py or .ipynb
+- Convert .harmony flows to .py or .ipynb
 - Run a .harmony flow
-- Include a `logs` folder with the logs of the flow in csv format
 - Provide a custom [IOSStream](https://ag2ai.github.io/ag2/docs/reference/io/base#iostream) to handle input and output.
 
 ## Installation
@@ -25,10 +24,10 @@ python -m pip install git+https://github.com/harmony/harmony.git
 ### CLI
 
 ```bash
-# Export a Harmony flow to a python script or a jupyter notebook
-harmony --export /path/to/a/flow.harmony --output /path/to/an/output/flow[.py|.ipynb]
-# Export and run the script, optionally force generation if the output file already exists
-harmony /path/to/a/flow.harmony --output /path/to/an/output/flow[.py] [--force]
+# Convert a Harmony flow to a python script or a jupyter notebook
+harmony convert --file /path/to/a/flow.harmony --output /path/to/an/output/flow[.py|.ipynb]
+# Convert and run the script, optionally force generation if the output file already exists
+harmony run --file /path/to/a/flow.harmony --output /path/to/an/output/flow[.py] [--force]
 ```
 
 ### Using docker/podman
@@ -37,12 +36,12 @@ harmony /path/to/a/flow.harmony --output /path/to/an/output/flow[.py] [--force]
 CONTAINER_COMMAND=docker # or podman
 # pull the image
 $CONTAINER_COMMAND pull harmony/harmony
-# Export a Harmony flow to a python script or a jupyter notebook
+# Convert a Harmony flow to a python script or a jupyter notebook
 $CONTAINER_COMMAND run \
   --rm \
   -v /path/to/a/flow.harmony:/flow.harmony \
   -v /path/to/an/output:/output \
-  harmony/harmony --export /flow.harmony --output /output/flow[.py|.ipynb]
+  harmony/harmony convert --file /flow.harmony --output /output/flow[.py|.ipynb]
 
 # with selinux and/or podman, you might get permission (or file not found) errors, so you can try:
 $CONTAINER_COMMAND run \
@@ -51,12 +50,16 @@ $CONTAINER_COMMAND run \
   -v /path/to/an/output:/output \
   --userns=keep-id \
   --security-opt label=disable \
-  harmony/harmony --export /flow.harmony --output /output/flow[.py|.ipynb]
+  harmony/harmony convert --file /flow.harmony --output /output/flow[.py|.ipynb]
 ```
 
 ```shell
-# Export and run the script
-$CONTAINER_COMMAND run --rm -v /path/to/a/flow.harmony:/flow.harmony -v /path/to/an/output:/output harmony/harmony /flow.harmony --output /output/output[.py]
+# Convert and run the script
+$CONTAINER_COMMAND run \
+  --rm \
+  -v /path/to/a/flow.harmony:/flow.harmony \
+  -v /path/to/an/output:/output \
+  harmony/harmony run --file /flow.harmony --output /output/output[.py]
 ```
 
 ### As a library
@@ -157,3 +160,4 @@ with HarmonyIOStream.set_default(io_stream):
 - [ag2 (formerly AutoGen)](https://github.com/ag2ai/ag2)
 - [juptytext](https://github.com/mwouts/jupytext)
 - [pydantic](https://github.com/pydantic/pydantic)
+- [typer](https://github.com/fastapi/typer)
