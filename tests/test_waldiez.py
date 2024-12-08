@@ -32,7 +32,7 @@ def test_harmony() -> None:
     assert next(harmony2.models)
     assert harmony2.has_rag_agents
     skill = next(harmony2.skills)
-    assert f"ag2[retrievechat]=={ag2_version}" in harmony2.requirements
+    assert f"pyautogen[retrievechat]=={ag2_version}" in harmony2.requirements
     assert "SKILL_KEY" in skill.secrets
     assert "SKILL_KEY" == harmony2.get_flow_env_vars()[0][0]
     for agent in harmony2.agents:
@@ -63,8 +63,8 @@ def test_harmony_without_rag() -> None:
     assert harmony.tags == flow_dict["tags"]
     assert next(harmony.models)
     assert not harmony.has_rag_agents
-    assert f"ag2[retrievechat]=={ag2_version}" not in harmony.requirements
-    assert f"ag2=={ag2_version}" in harmony.requirements
+    assert f"pyautogen[retrievechat]=={ag2_version}" not in harmony.requirements
+    assert f"pyautogen=={ag2_version}" in harmony.requirements
 
 
 def test_harmony_errors() -> None:
