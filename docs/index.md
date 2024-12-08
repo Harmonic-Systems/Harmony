@@ -1,5 +1,7 @@
 # Harmony
 
+Translate a Harmony flow:
+
 <img fetchpriority="high" alt="Harmony flow" src="static/images/overview.webp#only-light" />
 <img fetchpriority="high" alt="Harmony flow" src="static/images/overview_dark.webp#only-dark" />
 
@@ -13,11 +15,30 @@ To a python script or a jupyter notebook with the corresponding [ag2](https://gi
 
 ## Installation
 
+On PyPI:
+
+```bash
+python -m pip install harmony
+```
+
 From the repository:
 
 ```bash
 python -m pip install git+https://github.com/harmony/harmony.git
 ```
+
+!!! note
+    `autogen-agentchat` package conflicts with `ag2` / `pyautogen`. Ensure that `autogen-agentchat` is uninstalled before installing `harmony`. If you have already installed `autogen-agentchat`, you can uninstall it with the following command:
+
+    ```shell
+    pip uninstall autogen-agentchat -y
+    ```
+
+    If already installed harmony you might need to reinstall it after uninstalling `autogen-agentchat`:
+    
+      ```shell
+      pip install --force --no-cache harmony pyautogen
+      ```
 
 ## Usage
 
@@ -61,6 +82,13 @@ $CONTAINER_COMMAND run \
   -v /path/to/an/output:/output \
   harmony/harmony run --file /flow.harmony --output /output/output[.py]
 ```
+
+### UI
+
+For creating-only (no exporting or running) harmony flows, you can use the playground at <https://harmony.github.io>.  
+The repo for the js library is [here](https://github.com/harmony/react).  
+We are currently working on harmony-studio to provide a visual interface for creating and running Harmony flows (you can find more [here](https://github.com/harmony/studio)).  
+Until then, you can use our [Jupyter](https://github.com/harmony/jupyter) or the [VSCode](https://github.com/harmony/vscode) extension to create and run Harmony flows.
 
 ### As a library
 
