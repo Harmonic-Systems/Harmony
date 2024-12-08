@@ -148,8 +148,8 @@ class HarmonyGroupManagerSpeakers(HarmonyBase):
             default_factory=dict,
             title="Allowed or disallowed transitions",
             description=(
-                "A mapping (agent.id => List[agent.ids])",
-                "with the allowed or disallowed transitions.",
+                "A mapping (agent.id => List[agent.ids])"
+                "with the allowed or disallowed transitions."
             ),
             alias="allowedOrDisallowedTransitions",
         ),
