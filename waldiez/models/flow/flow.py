@@ -1,6 +1,7 @@
 """Harmony flow model."""
 
 import uuid
+from datetime import datetime, timezone
 from typing import List, Optional, Tuple
 
 from pydantic import Field, model_validator
@@ -10,6 +11,19 @@ from ..agents import HarmonyAgent
 from ..chat import HarmonyChat
 from ..common import HarmonyBase, now
 from .flow_data import HarmonyFlowData
+
+
+def id_factory() -> str:
+    """Generate a unique ID.
+
+    Returns
+    -------
+    str
+        The unique ID.
+    """
+    now_td = datetime.now(timezone.utc)
+    now_str = now_td.strftime("%Y%m%d%H%M%S%f")
+    return f"{now_str}-{uuid.uuid4().hex}"
 
 
 class HarmonyFlow(HarmonyBase):
@@ -44,7 +58,7 @@ class HarmonyFlow(HarmonyBase):
         Field(
             description="The ID of the flow",
             title="ID",
-            default_factory=uuid.uuid4,
+            default_factory=id_factory,
         ),
     ]
     type: Annotated[
