@@ -101,7 +101,7 @@ def test_harmony_with_invalid_requirement(
     flow_dict["requirements"] = ["invalid_requirement"]
     harmony = Harmony.from_dict(data=flow_dict)
     runner = HarmonyRunner(harmony)
-    runner._install_requirements(print)
+    runner.install_requirements()
     std_err = capsys.readouterr().out
     assert (
         "ERROR: No matching distribution found for invalid_requirement"
