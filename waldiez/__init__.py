@@ -1,12 +1,15 @@
 """Harmony package."""
 
 import logging
+import warnings
 
 from ._version import __version__
 from .conflict_checker import check_conflicts
 from .exporter import HarmonyExporter
 from .models import Harmony
 from .runner import HarmonyRunner
+
+warnings.filterwarnings("ignore", "flaml.automl is not available")
 
 
 # pylint: disable=too-few-public-methods
