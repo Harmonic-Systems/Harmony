@@ -1,8 +1,0 @@
-# ignore everything
-**/*
-# but not these files...
-!harmony/
-!pyproject.toml
-!requirements/main.txt
-!LICENSE
-!README.md
