@@ -60,7 +60,7 @@ jobs:
             linux/arm64
           file: packages/core/python/Containerfile
           context: packages/core/python
-          push: false
+          push: true
           tags: |
             harmony/harmony:${{ steps.docker_tag.outputs.docker_tag }}
             quay.io/harmony/harmony:${{ steps.docker_tag.outputs.docker_tag }}
@@ -75,7 +75,7 @@ jobs:
             linux/arm64
           file: packages/jupyter/Containerfile
           context: packages/jupyter
-          push: false
+          push: true
           tags: |
             harmony/harmony-jupyter:${{ steps.docker_tag.outputs.docker_tag }}
             quay.io/harmony/harmony-jupyter:${{ steps.docker_tag.outputs.docker_tag }}
@@ -90,7 +90,7 @@ jobs:
             linux/arm64
           file: packages/studio/Containerfile
           context: packages/studio
-          push: false
+          push: true
           tags: |
             harmony/harmony-studio:${{ steps.docker_tag.outputs.docker_tag }}
             quay.io/harmony/harmony-studio:${{ steps.docker_tag.outputs.docker_tag }}
