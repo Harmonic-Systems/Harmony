@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## v0.2.0
+
+- python dependency updates, including ag2 v0.6.0
+- introduce harmony_studio
+- add harmony studio and jupyter as harmony extras
+- Dev dependencies updates
+
 ## v0.1.20
 
 - Fix models not using a default base_url if not provided
