@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0.
+# Copyright (c) 2024 - 2025 Harmony and contributors.
 """Build podman/docker images.
 
 In sub-projects that have either a
