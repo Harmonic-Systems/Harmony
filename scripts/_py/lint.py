@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0.
+# Copyright (c) 2024 - 2025 Harmony and contributors.
 """Run python linters.
 
 This script runs the following linters:

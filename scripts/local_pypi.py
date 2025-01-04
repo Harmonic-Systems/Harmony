@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0.
+# Copyright (c) 2024 - 2025 Harmony and contributors.
 """Start a local PyPI server for testing packages."""
 
 import os

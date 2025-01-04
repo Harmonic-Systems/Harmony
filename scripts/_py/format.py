@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0.
+# Copyright (c) 2024 - 2025 Harmony and contributors.
 """Format python code using isort, autoflake, black and ruff.
 
 This script formats python code using isort, autoflake, black and ruff.
