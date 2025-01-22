@@ -77,8 +77,8 @@ jobs:
           context: packages/studio
           push: true
           tags: |
-            harmony/harmony-studio:${{ steps.docker_tag.outputs.docker_tag }}
-            quay.io/harmony/harmony-studio:${{ steps.docker_tag.outputs.docker_tag }}
+            harmony/studio:${{ steps.docker_tag.outputs.docker_tag }}
+            quay.io/harmony/studio:${{ steps.docker_tag.outputs.docker_tag }}
 
       - name: Build and push jupyter
         # manually, after publishing harmony_jupyter on pypi
@@ -93,5 +93,5 @@ jobs:
           context: packages/jupyter
           push: true
           tags: |
-            harmony/harmony-jupyter:${{ steps.docker_tag.outputs.docker_tag }}
-            quay.io/harmony/harmony-jupyter:${{ steps.docker_tag.outputs.docker_tag }}
+            harmony/jupyter:${{ steps.docker_tag.outputs.docker_tag }}
+            quay.io/harmony/jupyter:${{ steps.docker_tag.outputs.docker_tag }}
